@@ -1,0 +1,269 @@
+// vars
+// !important: This vars are linked to the variables.module file
+$container-max-width: 1440px;
+$gutter: 1rem;
+$columns-number: 12;
+$margin-number: 4;
+$them-spacing: 4;
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1440px;
+
+// Helpers
+
+$class : (p : 'padding',
+  pt : 'padding-top',
+  pr : 'padding-right',
+  pb : 'padding-bottom',
+  pl : 'padding-left',
+  m : 'margin',
+  mt : 'margin-top',
+  mr : 'margin-right',
+  mb : 'margin-bottom',
+  ml : 'margin-left'
+) !default;
+
+$grid-breakpoints: (
+  xs: $xs,
+  sm: $sm,
+  md: $md,
+  lg: $lg,
+  xl: $xl) !default;
+$size: (
+  0: 0rem,
+  1: .25rem,
+  2: .5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem) !default;
+
+// Small devices (landscape phones, etc)
+$screen-xs-min: 320px;
+// Medium devices (tablets, 768px and up)
+$screen-sm-min: 768px;
+// Large devices (desktops, 992px and up)
+$screen-md-min: 992px;
+// Extra large devices (large desktops, 1200px and up)
+$screen-lg-min: 1440px;
+
+/****** end vars *********/
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: $container-max-width;
+  width: 100%;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex-shrink: 1;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+[class*=col] {
+  padding: ($gutter / 2
+  );
+}
+
+.row.no-gutter [class*=col] {
+  padding: 0;
+}
+
+[class*=col].no-gutter {
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  appearance: none
+}
+
+::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+::-webkit-scrollbar-button:increment {
+  display: none
+}
+
+::-webkit-scrollbar-button {
+  display: none
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a6aaaf;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+
+.box {
+  @include transform(rotate(30deg));
+}
+
+@mixin xs {
+  @media (min-width: #{$screen-xs-min}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+@mixin gridGenerator($breakpoint) {
+  @for $column from 1 to $columns-number+1 {
+    .col-#{$breakpoint}-#{$column} {
+      width: (100% * $column) / $columns-number;
+    }
+  }
+}
+
+@include xs {
+  @include gridGenerator($breakpoint: 'xs');
+}
+
+@include sm {
+  @include gridGenerator($breakpoint: 'sm');
+}
+
+@include md {
+  @include gridGenerator($breakpoint: 'md');
+}
+
+@include lg {
+  @include gridGenerator($breakpoint: 'lg');
+}
+
+@each $class, $atrr in $class {
+  @each $breakpoint, $media in $grid-breakpoints {
+    @media(min-width: $media) {
+      @each $name, $size in $size {
+        .#{$class}-#{$breakpoint}-#{$name} {
+          #{$atrr}: $size !important;
+        }
+      }
+    }
+  }
+
+  @each $name, $size in $size {
+    .#{$class}-#{$name} {
+      #{$atrr}: $size !important;
+    }
+  }
+}
+
+.border-l {
+  border-left: 1px solid #c4c4c4
+}
+
+.border-r {
+  border-right: 1px solid #c4c4c4
+}
+
+.border-t {
+  border-top: 1px solid #c4c4c4
+}
+
+.border-b {
+  border-bottom: 1px solid #c4c4c4
+}
+
+.border {
+  border: 1px solid #c4c4c4
+}
+
+.position-relative {
+  position: relative;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+@media (min-width: $xs) {
+  h2 {
+    font-size: 18px;
+  }
+  p,
+  ul,
+  li,
+  span,
+  input,
+  textarea,
+  select {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: $sm) {
+    h2 {
+      font-size: 24px;
+    }
+    p,
+    ul,
+    li,
+    span,
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+}
+
+@media (min-width: $lg) {
+  h2 {
+    font-size: 32px;
+  }
+}

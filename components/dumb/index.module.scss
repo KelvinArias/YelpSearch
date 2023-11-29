@@ -1,0 +1,48 @@
+.categoryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  .tag {
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 300;
+  }
+}
+
+.rating {
+  border: none;
+  z-index: 2;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  label{
+    color: #d4d4d4;
+    &:before {
+      margin: 5px;
+      font-size: 1em;
+      font-family: FontAwesome;
+      display: inline-block;
+      content: "\f005";
+    }
+    &[data-rating="color"]{
+      color: #FF643D;
+    }
+  }
+  .half:before {
+    content: "\f089";
+    position: absolute;
+    top: 0;
+  }
+  p {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+    margin-left: 10px;
+  }
+}

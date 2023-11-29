@@ -1,0 +1,23 @@
+$container-max-width: 1440px;
+$gutter: 1rem;
+$columns-number: 12;
+$margin-number: 4;
+$them-spacing: 4;
+$xs: 0;
+$sm: 576;
+$md: 768;
+$lg: 992;
+$xl: 1440;
+
+:export {
+  xs: $xs;
+  sm: $sm;
+  md: $md;
+  lg: $lg;
+  xl: $xl;
+  container-max-width: $container-max-width;
+  gutter: $gutter;
+  columns-number: $columns-number;
+  margin-number: $margin-number;
+  them-spacing: $them-spacing;
+}

@@ -1,0 +1,27 @@
+.card {
+  width: 320px;
+  overflow: hidden;
+  position: relative;
+  margin: 30px auto;
+  border-radius: 15px;
+  .header {
+    width: 100%;
+    height: 300px;
+  }
+  .description {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 1;
+    color: #fff;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    height: 100px;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+    h3{
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+}
