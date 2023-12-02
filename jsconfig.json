@@ -6,8 +6,8 @@
       "@public/*": ["public/*"],
       "@store/*": ["store/*"],
       "@components/*": ["components/*"],
-      "@const": ["const.js"],
-      "@libs": ["libs.js"],
+      "@const/*": ["const/*"],
+      "@libs/*": ["libs/*"],
     }
   }
 }

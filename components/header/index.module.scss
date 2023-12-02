@@ -2,7 +2,7 @@
   background-color: red;
   display: flex;
   justify-content: center;
-  .container {
+  .mof {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
@@ -63,7 +63,7 @@
 @media (max-width: 992px) {
   .header.isSearchMobileOpen {
     position: relative;
-    .container{
+    .mof{
       .logo {
         animation: move .5s forwards;
       }
@@ -94,7 +94,7 @@
 
 @media (min-width: 576px) {
   .header.isSearchMobileOpen {
-    .container {
+    .mof {
       justify-content: center;
       .search {
         max-width: 500px;
@@ -105,7 +105,7 @@
 
 @media (min-width: 992px) {
   .header {
-    .container {
+    .mof {
       justify-content: center;
       .logo,
       .search {

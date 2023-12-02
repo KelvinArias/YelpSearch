@@ -11,12 +11,19 @@ const typeDefs = `
         getReviews(alias: String): [Review]
         hello: String
     }
+
+    type Hour {
+        open: [Time]
+        hours_type: String
+        is_open_now: Boolean
+    }
     
     type Business {
         id: ID!
         name: String
         alias: String
         categories: [Category]
+        hours: [Hour]
         rating: Float
         review_count: Int
         display_phone: String
@@ -35,11 +42,7 @@ const typeDefs = `
         day: Int
     }
 
-    type Hour {
-        open: [Time]
-        hours_type: String
-        is_open_now: Boolean
-    }
+    
 
     type Detail {
         id: ID!

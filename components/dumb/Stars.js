@@ -1,8 +1,8 @@
-import { rating as ratingClass, half, count } from "./index.module.scss";
-import { starsInfo } from "@const";
+import { rating as ratingClass, half } from "./index.module.scss";
+import { starsInfo } from "@const/index.js";
 import cx from "classnames";
 
-const Stars = ({ rating, review_count }) => {
+const Stars = ({ rating }) => {
   return (
     <div className={ratingClass}>
       {starsInfo.map((info) => (
@@ -14,7 +14,6 @@ const Stars = ({ rating, review_count }) => {
           data-rating={rating >= info.value ? "color" : "no-color"}
         />
       ))}
-      <p className={count}>{review_count} Reviews</p>
     </div>
   );
 };

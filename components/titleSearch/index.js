@@ -1,9 +1,9 @@
 "use client";
 import { useState, useRef } from "react";
-import { useClickOutside } from "@/libs";
+import { useClickOutside } from "@libs/index.js";
 import styles from "./index.module.scss";
 import cx from "classnames";
-import { listValues } from "@const";
+import { listValues } from "@const/index.js";
 
 const TitleSearch = ({ searchValue, sortValue, setSort }) => {
   const [showList, setShowList] = useState(false);

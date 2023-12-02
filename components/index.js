@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Header from "./header";
 import TitleSearch from "./titleSearch";
-import { listValues } from "@const";
+import { listValues } from "@const/index.js";
 import Card from "./card";
-import Loading from "./dumb/Loading";
+import Loading from "./dumb/loading";
 /*
 import Detail from "./Detail";*/
 import {
@@ -68,14 +68,17 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
       {isLoading ? (
         <Loading />
       ) : (
-        businesses.map((business) => (
-          <Card
-            business={business}
-            key={business.id}
-            viewBusiness={handleViewBusiness}
-            viewed={viewedBusinesses.includes(business.id)}
-          />
-        ))
+        businesses.map((business, i) => {
+          i === 0 && console.log(business);
+          return (
+            <Card
+              business={business}
+              key={business.id}
+              viewBusiness={handleViewBusiness}
+              viewed={viewedBusinesses.includes(business.id)}
+            />
+          );
+        })
       )}
       {/*
       {openDetail && (

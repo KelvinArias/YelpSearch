@@ -1,7 +1,10 @@
 import styles from "./index.module.scss";
+import open from "@public/open.png";
+import locationPNG from "@public/location.png";
 import Image from "next/image";
-import Tags from "../dumb/Tag";
-import Stars from "../dumb/Stars";
+import Tags from "../dumb/tag";
+import Score from "../dumb/score";
+import Button from "../dumb/button";
 
 const Card = ({ business }) => {
   const {
@@ -12,6 +15,7 @@ const Card = ({ business }) => {
     display_phone,
     review_count,
     rating,
+    photos,
   } = business;
 
   return (
@@ -26,9 +30,23 @@ const Card = ({ business }) => {
         <div className={styles.description}>
           <h3>{name}</h3>
           <Tags categories={categories} />
-          <Stars rating={rating} review_count={review_count} />
+          <Score rating={rating} review_count={review_count} />
         </div>
       </header>
+      <div className={styles.information}>
+        <div className={styles.direction}>
+          <Image src={open} alt="local image" width={30} height={30} />
+          <Button href="https://kresume.dev/" text="Get Directions" />
+        </div>
+        <div className={styles.address}>
+          <Image src={locationPNG} alt="local image" width={20} height={20} />
+          <p className="p-0">{location.display_address.join(", ")}</p>
+        </div>
+        <div className={styles.address}>
+          <Image src={locationPNG} alt="local image" width={20} height={20} />
+          <p className="p-0">{location.display_address.join(", ")}</p>
+        </div>
+      </div>
     </article>
   );
 };

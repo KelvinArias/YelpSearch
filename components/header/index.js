@@ -10,10 +10,10 @@ const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
   return (
     <header
       className={cx(styles.header, {
-        isSearchMobileOpen,
+        [styles.isSearchMobileOpen]: isSearchMobileOpen,
       })}
     >
-      <div className={styles.container}>
+      <div className={cx("container", styles.mof)}>
         <Image
           width={80}
           height={40}
