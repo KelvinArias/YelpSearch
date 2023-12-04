@@ -20,6 +20,9 @@ export const getBusiness = (location) => async (dispatch) => {
                     location{
                       display_address
                     }
+                    is_closed
+                    transactions
+                    price
                 }
             }
         `;

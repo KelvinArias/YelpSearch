@@ -1,5 +1,5 @@
 import { score, count } from "./index.module.scss";
-import Stars from "./stars";
+import Stars from "./Stars";
 
 const Score = ({ rating, review_count }) => {
   return (

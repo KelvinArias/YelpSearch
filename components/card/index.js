@@ -1,10 +1,13 @@
+import { Fragment } from "react";
 import styles from "./index.module.scss";
-import open from "@public/open.png";
-import locationPNG from "@public/location.png";
+import SignSVG from "@public/sign";
+import LocationSVG from "@public/location";
+import PhoneSVG from "@public/phone";
 import Image from "next/image";
 import Tags from "../dumb/tag";
 import Score from "../dumb/score";
 import Button from "../dumb/button";
+import CheckSvg from "@public/check";
 
 const Card = ({ business }) => {
   const {
@@ -15,7 +18,9 @@ const Card = ({ business }) => {
     display_phone,
     review_count,
     rating,
-    photos,
+    is_closed,
+    transactions,
+    price,
   } = business;
 
   return (
@@ -27,24 +32,34 @@ const Card = ({ business }) => {
           layout="fill"
           objectFit="cover"
         />
+      </header>
+      <div className={styles.information}>
         <div className={styles.description}>
           <h3>{name}</h3>
           <Tags categories={categories} />
           <Score rating={rating} review_count={review_count} />
         </div>
-      </header>
-      <div className={styles.information}>
         <div className={styles.direction}>
-          <Image src={open} alt="local image" width={30} height={30} />
+          <SignSVG is_closed={is_closed} size={50} />
           <Button href="https://kresume.dev/" text="Get Directions" />
         </div>
         <div className={styles.address}>
-          <Image src={locationPNG} alt="local image" width={20} height={20} />
-          <p className="p-0">{location.display_address.join(", ")}</p>
+          <LocationSVG color={is_closed ? "#E00707" : "#008055"} size={20} />
+          <p className="p-0">
+            {location.display_address.join(", ")}.<span>{price}</span>
+          </p>
         </div>
         <div className={styles.address}>
-          <Image src={locationPNG} alt="local image" width={20} height={20} />
-          <p className="p-0">{location.display_address.join(", ")}</p>
+          <PhoneSVG color={is_closed ? "#E00707" : "#008055"} size={20} />
+          <p className="p-0">{display_phone}</p>
+        </div>
+        <div className={styles.transactions}>
+          {transactions.map((transaction) => (
+            <Fragment key={transaction}>
+              <CheckSvg size={15} />
+              <p>{transaction}</p>
+            </Fragment>
+          ))}
         </div>
       </div>
     </article>

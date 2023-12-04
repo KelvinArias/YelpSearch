@@ -29,6 +29,9 @@ const typeDefs = `
         display_phone: String
         image_url: String
         location: Location
+        is_closed: Boolean
+        transactions: [String]
+        price: String
     }
 
     type Category {

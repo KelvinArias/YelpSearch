@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import styles from "./index.module.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Header from "./header";
@@ -68,17 +69,19 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
       {isLoading ? (
         <Loading />
       ) : (
-        businesses.map((business, i) => {
-          i === 0 && console.log(business);
-          return (
-            <Card
-              business={business}
-              key={business.id}
-              viewBusiness={handleViewBusiness}
-              viewed={viewedBusinesses.includes(business.id)}
-            />
-          );
-        })
+        <section className={styles.cardContainer}>
+          {businesses.map((business, i) => {
+            i === 0 && console.log(business);
+            return (
+              <Card
+                business={business}
+                key={business.id}
+                viewBusiness={handleViewBusiness}
+                viewed={viewedBusinesses.includes(business.id)}
+              />
+            );
+          })}
+        </section>
       )}
       {/*
       {openDetail && (
