@@ -24,7 +24,7 @@ const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
           className={styles.logo}
         />
         <search className={styles.search}>
-          {filterQuantity && !isSearchMobileOpen && (
+          {Boolean(filterQuantity) && !isSearchMobileOpen && (
             <div className={styles.tag}>{filterQuantity}</div>
           )}
           <form>

@@ -25,3 +25,41 @@ export const starsInfo = [
   },
   { id: "star1", value: 1, htmlFor: "star1", title: "Suck big time - 1 star" },
 ].sort((a, b) => a.value - b.value);
+
+// Filter
+
+export const KEY_RADIUS = "radius";
+export const KEY_CATEGORIES = "categories";
+export const KEY_SUGGESTED = "suggested";
+export const KEY_PRICE = "price";
+
+export const prices = [1, 2, 3, 4];
+export const suggestedValues = {
+  hot_and_new: "Popular",
+  deals: "Deals",
+  open_to_all: "Open To All",
+  reservation: "Reservation",
+};
+export const categories = {
+  restaurants: "Restaurants",
+  food: "Food",
+  breakfastbrunch: "Breakfast & Brunch",
+  bars: "Bars",
+  nightLife: "Night Life",
+  sushibars: "Sushi Bars",
+  seafood: "Seafood",
+  japanese: "Japanese",
+  chinese: "Chinese",
+  coffeetea: "Coffee & tea",
+  peruvian: "Peruvian",
+  pizza: "Pizza",
+  mexican: "Mexican",
+};
+// based on meters transformed into miles
+export const radius = {
+  500: "0.5Mi",
+  1609: "1Mi",
+  3218: "2Mi",
+  8046: "5Mi",
+  16093: "10Mi",
+};

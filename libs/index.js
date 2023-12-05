@@ -14,3 +14,17 @@ export const useClickOutside = (ref, callback) => {
     };
   }, [ref, callback]);
 };
+
+export const getFiltersQuantity = (filters) => {
+  let quantity = 0;
+
+  Object.keys(filters).forEach((key) => {
+    if (Array.isArray(filters[key])) {
+      quantity += filters[key].length;
+    } else {
+      quantity++;
+    }
+  });
+
+  return quantity;
+};
