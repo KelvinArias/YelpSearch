@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./index.module.scss";
 import cx from "classnames";
 import Car from "@public/car.png";
@@ -14,6 +15,15 @@ import {
   radius,
 } from "@const/index";
 
+/**
+ * Filter component for displaying and handling business filters.
+ *
+ * @component
+ * @param {Object} filters - The current set of filters.
+ * @param {Function} setFilter - A function to update the filters.
+ * @param {number} filtersQuantity - The quantity of active filters.
+ * @returns {JSX.Element} The rendered Filter component.
+ */
 const Filter = ({ filters, setFilter, filtersQuantity }) => {
   const [classToAdd, setClassToAdd] = useState("");
   const filterPrices = filters[KEY_PRICE] ?? [];
@@ -152,6 +162,12 @@ const Filter = ({ filters, setFilter, filtersQuantity }) => {
       </div>
     </aside>
   );
+};
+
+Filter.propTypes = {
+  filters: PropTypes.object.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  filtersQuantity: PropTypes.number.isRequired,
 };
 
 export default Filter;

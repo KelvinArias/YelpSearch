@@ -1,6 +1,12 @@
 import Image from "next/image";
 import loadingSvg from "@public/loading.gif";
 
+/**
+ * Loading component for displaying a loading indicator.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Loading component.
+ */
 const Loading = () => {
   return (
     <div className="container pt-5 pb-5 d-flex align-center justify-content-center">

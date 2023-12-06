@@ -8,7 +8,25 @@ import Tags from "../dumb/tag";
 import Score from "../dumb/score";
 import Button from "../dumb/button";
 import CheckSvg from "@public/check";
+import PropTypes from "prop-types";
 
+/**
+ * Card component for displaying business information.
+ *
+ * @component
+ * @param {Object} business - The business data to display.
+ * @param {string} business.image_url - The URL of the business image.
+ * @param {string} business.name - The name of the business.
+ * @param {string} business.location - The location of the business.
+ * @param {Array} business.categories - The categories of the business.
+ * @param {string} business.display_phone - The phone number of the business.
+ * @param {number} business.review_count - The number of reviews for the business.
+ * @param {number} business.rating - The rating of the business.
+ * @param {boolean} business.is_closed - Indicates if the business is closed.
+ * @param {Array} business.transactions - The transactions associated with the business.
+ * @param {string} business.price - The price category of the business.
+ * @returns {JSX.Element} The rendered Card component.
+ */
 const Card = ({ business }) => {
   const {
     image_url,
@@ -64,6 +82,21 @@ const Card = ({ business }) => {
       </div>
     </article>
   );
+};
+
+Card.propTypes = {
+  business: PropTypes.shape({
+    image_url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    categories: PropTypes.array.isRequired,
+    display_phone: PropTypes.string.isRequired,
+    review_count: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    is_closed: PropTypes.bool.isRequired,
+    transactions: PropTypes.array.isRequired,
+    price: PropTypes.string.isRequired,
+  }),
 };
 
 export default Card;

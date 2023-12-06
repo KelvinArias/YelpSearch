@@ -1,9 +1,19 @@
 "use client";
+import PropTypes from "prop-types";
 import { useRef } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import cx from "classnames";
 
+/**
+ * Header component for displaying the application header.
+ *
+ * @component
+ * @param {Function} setSearch - A function to update the search value.
+ * @param {boolean} isSearchMobileOpen - Indicates if the mobile search is open.
+ * @param {number} filterQuantity - The quantity of active filters.
+ * @returns {JSX.Element} The rendered Header component.
+ */
 const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
   const refInput = useRef(null);
 
@@ -49,6 +59,12 @@ const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  setSearch: PropTypes.func.isRequired,
+  isSearchMobileOpen: PropTypes.bool.isRequired,
+  filterQuantity: PropTypes.number.isRequired,
 };
 
 export default Header;

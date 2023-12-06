@@ -1,10 +1,20 @@
 "use client";
+import PropTypes from "prop-types";
 import { useState, useRef } from "react";
 import { useClickOutside } from "@libs/index.js";
 import styles from "./index.module.scss";
 import cx from "classnames";
 import { listValues } from "@const/index.js";
 
+/**
+ * TitleSearch component for displaying the title and sorting options.
+ *
+ * @component
+ * @param {string} searchValue - The current search value.
+ * @param {string} sortValue - The current sort value.
+ * @param {Function} setSort - A function to update the sort value.
+ * @returns {JSX.Element} The rendered TitleSearch component.
+ */
 const TitleSearch = ({ searchValue, sortValue, setSort }) => {
   const [showList, setShowList] = useState(false);
   const ref = useRef(null);
@@ -41,6 +51,12 @@ const TitleSearch = ({ searchValue, sortValue, setSort }) => {
       </div>
     </section>
   );
+};
+
+TitleSearch.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  sortValue: PropTypes.string.isRequired,
+  setSort: PropTypes.func.isRequired,
 };
 
 export default TitleSearch;

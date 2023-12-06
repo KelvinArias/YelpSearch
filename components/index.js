@@ -19,6 +19,28 @@ import {
 } from "@store/actions/homeActions.js";
 import { getFiltersQuantity } from "@libs/index.js";
 
+/**
+ * Principal Body of the website.
+ * @component
+ * @param {Function} getBusiness - Obtains the business
+ * @param {Boolean} initLoading - Initialize the loading when the user make a search
+ * @param {Function} getDetail - Obtains the details of the business selected
+ * @param {Function} getReviews - Obtains the reviews from the business selected
+ * @param {Object} data - Global information about the business and charging status
+ * @param {Boolean} data.isLoading - Indicate if it's loading a search
+ * @param {Object} data.business - Object with all the information about the business
+ * @param {Boolean} data.business.image_url - image url of the business
+ * @param {String} data.business.name - Name of the business
+ * @param {String} data.business.location - address of the business
+ * @param {Array} data.business.categories - Categories of the business
+ * @param {String} data.business.display_phone - Display phone number of the business
+ * @param {Number} data.business.review_count - Number of reviews for the business
+ * @param {Number} data.business.rating - Rating of the business
+ * @param {Boolean} data.business.is_closed - Indicates if the business is closed
+ * @param {Array} data.business.transaction - Contains the transaction that the business allows
+ * @param {Array} data.business.price - Indicates how expensive the business is.
+ * @returns {JSX.Element} The rendered component.
+ */
 const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   const [searchValue, setSearch] = useState("Seattle");
   const [sortValue, setSort] = useState(listValues[0]);
