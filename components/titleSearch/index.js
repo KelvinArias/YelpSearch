@@ -31,7 +31,7 @@ const TitleSearch = ({ searchValue, sortValue, setSort }) => {
           ref={ref}
         >
           <p>{sortValue}</p>
-          <div className={cx(styles.arrow, { rotate: showList })} />
+          <div className={cx(styles.arrow, { [styles.rotate]: showList })} />
           {showList && (
             <ul className={styles.list}>
               {listValues.map((value) => (

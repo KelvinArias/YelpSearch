@@ -105,6 +105,11 @@
 
 @media (min-width: 992px) {
   .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
     .mof {
       justify-content: center;
       .logo,
@@ -123,6 +128,9 @@
         }
       }
     }
+  }
+  .placeHolder {
+    height: 100px;
   }
 }
 

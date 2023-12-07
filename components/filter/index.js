@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import cx from "classnames";
 import Car from "@public/car.png";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState, useEffect, Fragment } from "react";
 import {
   KEY_PRICE,
   KEY_CATEGORIES,
@@ -22,14 +22,36 @@ import {
  * @param {Object} filters - The current set of filters.
  * @param {Function} setFilter - A function to update the filters.
  * @param {number} filtersQuantity - The quantity of active filters.
+ * @param {Boolean} isSearchMobileOpen - Indicates whether the filter is open or closed in mobile.
  * @returns {JSX.Element} The rendered Filter component.
  */
-const Filter = ({ filters, setFilter, filtersQuantity }) => {
+const Filter = ({
+  filters,
+  setFilter,
+  filtersQuantity,
+  isSearchMobileOpen,
+}) => {
   const [classToAdd, setClassToAdd] = useState("");
+  const [showMore, setShowMore] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+  const ref = useRef(null);
   const filterPrices = filters[KEY_PRICE] ?? [];
   const filterSuggestions = filters[KEY_SUGGESTED] ?? [];
   const filterCategories = filters[KEY_CATEGORIES] ?? [];
   const filterRadius = filters[KEY_RADIUS] ?? 0;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = ref.current.getBoundingClientRect().top <= 100;
+      setIsFixed(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [setIsFixed]);
 
   const removeFilter = (key) => {
     const { [key]: _, ...others } = filters;
@@ -62,105 +84,121 @@ const Filter = ({ filters, setFilter, filtersQuantity }) => {
   };
 
   return (
-    <aside className={styles.filter}>
-      <p className={styles.title}>{filtersQuantity} Filters</p>
-      {Boolean(filtersQuantity) && (
-        <p
-          className={styles.clear}
-          onClick={() => {
-            setFilter({});
-            setClassToAdd("");
-          }}
-        >
-          clear all
-        </p>
-      )}
-      <div className={styles.prices}>
-        {prices.map((price) => (
+    <Fragment>
+      <div ref={ref} className={cx({ [styles.placeHolder]: isFixed })} />
+      <aside
+        className={cx(styles.filter, {
+          [styles.isSearchMobileOpen]: isSearchMobileOpen,
+          [styles.isFixed]: isFixed,
+        })}
+        style={{
+          left: isFixed ? ref.current.getBoundingClientRect().left + "px" : 0,
+        }}
+      >
+        <p className={styles.title}>{filtersQuantity} Filters</p>
+        {Boolean(filtersQuantity) && (
           <p
-            className={cx({
-              [styles.priceSelected]: filterPrices.includes(price),
-            })}
-            key={price}
-            onClick={() => handleSelection(price, filterPrices, KEY_PRICE)}
+            className={styles.clear}
+            onClick={() => {
+              setFilter({});
+              setClassToAdd("");
+            }}
           >
-            {"$".repeat(price)}
+            clear all
           </p>
-        ))}
-      </div>
-      <div className={styles.suggested}>
-        <p className={styles.title}>Suggested</p>
-        <fieldset>
-          {Object.keys(suggestedValues).map((key) => (
-            <label key={key}>
-              <input
-                type="checkbox"
-                name={key}
-                onChange={(e) =>
-                  handleSelection(
-                    e.target.value,
-                    filterSuggestions,
-                    KEY_SUGGESTED
-                  )
-                }
-                title={key}
-                value={key}
-              />
-              <span className={styles.check}></span>
-              {suggestedValues[key]}
-            </label>
-          ))}
-        </fieldset>
-      </div>
-      <div className={styles.categories}>
-        <p className={styles.title}>Category</p>
-        <span className={styles.more}>...</span>
-        <div className={styles.tagContainer}>
-          {Object.keys(categories).map((key) => (
+        )}
+        <div className={styles.prices}>
+          {prices.map((price) => (
             <p
-              key={key}
-              onClick={() =>
-                handleSelection(key, filterCategories, KEY_CATEGORIES)
-              }
-              className={cx(styles.tag, {
-                [styles.selected]: filterCategories.includes(key),
+              className={cx({
+                [styles.priceSelected]: filterPrices.includes(price),
               })}
+              key={price}
+              onClick={() => handleSelection(price, filterPrices, KEY_PRICE)}
             >
-              {categories[key]}
+              {"$".repeat(price)}
             </p>
           ))}
         </div>
-      </div>
-      <div className={styles.distance}>
-        <p className={styles.title}>Distance</p>
-        <div
-          role="range"
-          className={cx(styles.range, {
-            [styles.thereIsDistance]: filterRadius,
-            [styles[classToAdd]]: Boolean(classToAdd),
-          })}
-        >
-          <Image
-            className={styles.car}
-            src={Car}
-            alt="Car distance"
-            width={40}
-            height={40}
-          />
-          {Object.keys(radius).map((key, i) => (
-            <div
-              key={key}
-              className={cx(styles.point, {
-                [styles.selected]: key === filterRadius,
-              })}
-              onClick={() => handleDistance(key, i)}
-            >
-              <p>{radius[key]}.</p>
-            </div>
-          ))}
+        <div className={styles.suggested}>
+          <p className={styles.title}>Suggested</p>
+          <fieldset>
+            {Object.keys(suggestedValues).map((key) => (
+              <label key={key}>
+                <input
+                  type="checkbox"
+                  name={key}
+                  checked={filterSuggestions.includes(key)}
+                  onChange={(e) =>
+                    handleSelection(
+                      e.target.value,
+                      filterSuggestions,
+                      KEY_SUGGESTED
+                    )
+                  }
+                  title={key}
+                  value={key}
+                />
+                <span className={styles.check}></span>
+                {suggestedValues[key]}
+              </label>
+            ))}
+          </fieldset>
         </div>
-      </div>
-    </aside>
+        <div className={styles.categories}>
+          <p className={styles.title}>Category</p>
+          <span onClick={() => setShowMore(!showMore)} className={styles.more}>
+            ...
+          </span>
+          <div
+            className={cx(styles.tagContainer, { [styles.showMore]: showMore })}
+          >
+            {Object.keys(categories).map((key) => (
+              <p
+                key={key}
+                onClick={() =>
+                  handleSelection(key, filterCategories, KEY_CATEGORIES)
+                }
+                className={cx(styles.tag, {
+                  [styles.selected]: filterCategories.includes(key),
+                })}
+              >
+                {categories[key]}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className={styles.distance}>
+          <p className={styles.title}>Distance</p>
+          <div
+            role="range"
+            className={cx(styles.range, {
+              [styles.thereIsDistance]: filterRadius,
+              [styles[classToAdd]]: Boolean(classToAdd),
+            })}
+          >
+            <Image
+              className={styles.car}
+              src={Car}
+              alt="Car distance"
+              width={40}
+              height={40}
+            />
+            {Object.keys(radius).map((key, i) => (
+              <div
+                key={key}
+                className={cx(styles.point, {
+                  [styles.selected]: key === filterRadius,
+                })}
+                onClick={() => handleDistance(key, i)}
+              >
+                <p>{radius[key]}.</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </aside>
+    </Fragment>
   );
 };
 

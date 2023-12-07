@@ -1,4 +1,13 @@
+.content {
+  display: flex;
+  justify-content: center;
+  .contentContainer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
+  width: fit-content;
 }

@@ -9,17 +9,15 @@ import { categoryContainer, tag } from "./index.module.scss";
  * @param {String} categories.title - The category's value.
  * @returns {JSX.Element} The rendered Tag component.
  */
-const Tag = ({ categories }) => {
-  return (
-    <div className={categoryContainer}>
-      {categories.map((category) => (
-        <div className={tag} key={category.title}>
-          {category.title}
-        </div>
-      ))}
-    </div>
-  );
-};
+const Tag = ({ categories }) => (
+  <div className={categoryContainer}>
+    {categories.map((category) => (
+      <div className={tag} key={category.title}>
+        {category.title}
+      </div>
+    ))}
+  </div>
+);
 
 Tag.propTypes = {
   categories: PropTypes.arrayOf(

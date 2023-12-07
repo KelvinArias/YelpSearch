@@ -6,6 +6,7 @@
   box-sizing: content-box;
   border-radius: 15px;
   transition: .3s all;
+  box-sizing: border-box;
   cursor: pointer;
   .header {
     width: 100%;
@@ -79,7 +80,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 576px) {
   .card {
     max-width: 600px;
     .information {
@@ -115,7 +116,7 @@
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1200px) {
   .card {
     max-width: 997px;
     display: flex;
@@ -166,6 +167,8 @@
           font-weight: bold;
           &:hover{
             border-color: #008055;
+            background-color: #0080558c;
+            color: #fff;
           }
         }
       }

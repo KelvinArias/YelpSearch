@@ -44,12 +44,13 @@
         transform: translateX(-50%);
         text-align: center;
         background-color: #fff;
+        z-index: 2;
         li {
           list-style-type: none;
           padding: 5px 0;
           cursor: pointer;
           &:hover {
-            background-color: #d4d4d4;
+            background-color: #02799777;
             color: #fff;
           }
         }

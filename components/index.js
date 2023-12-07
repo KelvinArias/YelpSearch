@@ -9,6 +9,7 @@ import { listValues } from "@const/index.js";
 import Card from "./card";
 import Loading from "./dumb/loading";
 import Filter from "./filter";
+import cx from "classnames";
 /*
 import Detail from "./Detail";*/
 import {
@@ -90,29 +91,29 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
         sortValue={sortValue}
         setSort={setSort}
       />
-      {isSearchMobileOpen && (
-        <Filter
-          filters={filters}
-          setFilter={setFilter}
-          filtersQuantity={filtersQuantity}
-        />
-      )}
-      {isLoading && <Loading />}
-      {!isLoading && !isSearchMobileOpen && (
-        <section className={styles.cardContainer}>
-          {businesses.map((business, i) => {
-            i === 0 && console.log(business);
-            return (
-              <Card
-                business={business}
-                key={business.id}
-                viewBusiness={handleViewBusiness}
-                viewed={viewedBusinesses.includes(business.id)}
-              />
-            );
-          })}
-        </section>
-      )}
+      <div className={styles.content}>
+        <div className={cx("container", styles.contentContainer)}>
+          <Filter
+            filters={filters}
+            setFilter={setFilter}
+            filtersQuantity={filtersQuantity}
+            isSearchMobileOpen={isSearchMobileOpen}
+          />
+          {isLoading && <Loading />}
+          {!isLoading && !isSearchMobileOpen && (
+            <section className={styles.cardContainer}>
+              {businesses.map((business, i) => (
+                <Card
+                  business={business}
+                  key={business.id}
+                  viewBusiness={handleViewBusiness}
+                  viewed={viewedBusinesses.includes(business.id)}
+                />
+              ))}
+            </section>
+          )}
+        </div>
+      </div>
 
       {/*
       {openDetail && (

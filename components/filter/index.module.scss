@@ -9,6 +9,10 @@
   padding: 30px 20px;
   font-size: 16px;
   overflow: scroll;
+  display: none;
+  &.isSearchMobileOpen {
+    display: block;
+  }
   .title {
     font-weight: bold;
     padding: 0;
@@ -19,6 +23,7 @@
     padding: 0;
     margin: 0;
     margin-top: -15px;
+    margin-bottom: 15px;
     font-size: 14px;
     color: #027A97;
     cursor: pointer;
@@ -126,14 +131,15 @@
       top: 0;
       right: 0;
       line-height: 0;
-    }
+      cursor: pointer;
+    } 
     .tagContainer {
       display: flex;
       justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
       overflow: hidden;
-      max-height: 75px;
+      height: 75px;
       cursor: pointer;
       .tag {
         margin: 0;
@@ -151,6 +157,9 @@
           background-color: #027A97;
           color: #fff;
         }
+      }
+      &.showMore {
+        height: fit-content;
       }
     }
   }
@@ -243,5 +252,39 @@
         }
       }
     }
+  }
+}
+
+
+
+@media (min-width: 992px) {
+  .filter {
+    display: block;
+    width: 100%;
+    max-width: 375px;
+    position: relative;
+    height: fit-content;
+    padding-bottom: 10px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    top: initial;
+    margin-top: 30px;
+    left: 0;
+    overflow-y: scroll;
+    margin-left: 20px;
+    &.isFixed {
+      position: fixed;
+      top: 100px;
+      height: calc(100vh - 120px);
+      max-height: 675px;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+  }
+  .placeHolder {
+    width: 100%;
+    max-width: 395px;
+    display: block;
+    padding: 30px 20px;
   }
 }
