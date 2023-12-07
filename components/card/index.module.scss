@@ -14,6 +14,14 @@
     position: relative;
     overflow: hidden;
     border-radius: 15px 15px 0 0;
+    img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      inset: 0px;
+      object-fit: cover;
+      color: transparent;
+    }
   }
   .information {
     width: 100%;

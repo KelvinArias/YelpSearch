@@ -18,6 +18,7 @@ import PropTypes from "prop-types";
  * @param {string} business.image_url - The URL of the business image.
  * @param {string} business.name - The name of the business.
  * @param {string} business.location - The location of the business.
+ * @param {Array} business.location.display_address - display address of the business
  * @param {Array} business.categories - The categories of the business.
  * @param {string} business.display_phone - The phone number of the business.
  * @param {number} business.review_count - The number of reviews for the business.
@@ -47,8 +48,9 @@ const Card = ({ business }) => {
         <Image
           src={image_url}
           alt="local image"
-          layout="fill"
-          objectFit="cover"
+          width={400}
+          height={400}
+          priority={true}
         />
       </header>
       <div className={styles.information}>
@@ -88,7 +90,9 @@ Card.propTypes = {
   business: PropTypes.shape({
     image_url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      display_address: PropTypes.array.isRequired,
+    }).isRequired,
     categories: PropTypes.array.isRequired,
     display_phone: PropTypes.string.isRequired,
     review_count: PropTypes.number.isRequired,

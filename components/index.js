@@ -32,7 +32,8 @@ import { getFiltersQuantity } from "@libs/index.js";
  * @param {Object} data.business - Object with all the information about the business
  * @param {Boolean} data.business.image_url - image url of the business
  * @param {String} data.business.name - Name of the business
- * @param {String} data.business.location - address of the business
+ * @param {Object} data.business.location - address of the business
+ * @param {Array} data.business.location.display_address - display address of the business
  * @param {Array} data.business.categories - Categories of the business
  * @param {String} data.business.display_phone - Display phone number of the business
  * @param {Number} data.business.review_count - Number of reviews for the business
