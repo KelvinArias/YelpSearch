@@ -11,3 +11,13 @@
   flex-wrap: wrap;
   width: fit-content;
 }
+
+.isSearchMobileOpen {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .isSearchMobileOpen {
+    display: flex;
+  }
+}

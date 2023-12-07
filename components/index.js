@@ -99,9 +99,14 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
             filtersQuantity={filtersQuantity}
             isSearchMobileOpen={isSearchMobileOpen}
           />
-          {isLoading && <Loading />}
-          {!isLoading && !isSearchMobileOpen && (
-            <section className={styles.cardContainer}>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <section
+              className={cx(styles.cardContainer, {
+                [styles.isSearchMobileOpen]: isSearchMobileOpen,
+              })}
+            >
               {businesses.map((business, i) => (
                 <Card
                   business={business}

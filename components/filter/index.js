@@ -85,7 +85,12 @@ const Filter = ({
 
   return (
     <Fragment>
-      <div ref={ref} className={cx({ [styles.placeHolder]: isFixed })} />
+      <div
+        ref={ref}
+        className={cx(styles.positionPlaceHolder, {
+          [styles.placeHolder]: isFixed,
+        })}
+      />
       <aside
         className={cx(styles.filter, {
           [styles.isSearchMobileOpen]: isSearchMobileOpen,

@@ -5,7 +5,7 @@
   background: #fff;
   width: 100%;
   height: calc(100vh - 88px);
-  z-index: 10;
+  z-index: 3;
   padding: 30px 20px;
   font-size: 16px;
   overflow: scroll;
@@ -265,8 +265,7 @@
     position: relative;
     height: fit-content;
     padding-bottom: 10px;
-    border: 1px solid #d4d4d4;
-    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     top: initial;
     margin-top: 30px;
     left: 0;
@@ -276,7 +275,7 @@
       position: fixed;
       top: 100px;
       height: calc(100vh - 120px);
-      max-height: 675px;
+      max-height: 700px;
       margin-left: 20px;
       margin-top: 10px;
     }
@@ -286,5 +285,9 @@
     max-width: 395px;
     display: block;
     padding: 30px 20px;
+  }
+  .positionPlaceHolder {
+    position: relative;
+    top: 200px;
   }
 }
