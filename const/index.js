@@ -30,7 +30,7 @@ export const starsInfo = [
 
 export const KEY_RADIUS = "radius";
 export const KEY_CATEGORIES = "categories";
-export const KEY_SUGGESTED = "suggested";
+export const KEY_SUGGESTED = "attributes";
 export const KEY_PRICE = "price";
 
 export const prices = [1, 2, 3, 4];
@@ -41,14 +41,14 @@ export const suggestedValues = {
   reservation: "Reservation",
 };
 export const categories = {
-  restaurants: "Restaurants",
-  food: "Food",
-  breakfastbrunch: "Breakfast & Brunch",
+  acaibowls: "Acai Bowls",
+  wraps: "Wraps",
   bars: "Bars",
   nightLife: "Night Life",
   sushibars: "Sushi Bars",
   seafood: "Seafood",
   japanese: "Japanese",
+  juicebars: "Juice Bars & Smoothies",
   chinese: "Chinese",
   coffeetea: "Coffee & tea",
   peruvian: "Peruvian",

@@ -39,13 +39,14 @@ const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
             {Boolean(filterQuantity) && !isSearchMobileOpen && (
               <div className={styles.tag}>{filterQuantity}</div>
             )}
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
               <input
                 placeholder="Search by location..."
                 className={cx(styles.input, "p-2")}
-                onKeyPress={(e) =>
-                  e.key === "Enter" && setSearch(e.currentTarget.value)
+                onKeyDown={(e) =>
+                  e.code === "Enter" && setSearch(e.target.value)
                 }
+                type="search"
                 ref={refInput}
               />
             </form>

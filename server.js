@@ -6,32 +6,31 @@ const client = yelp.client(process.env.API_KEY);
 
 const typeDefs = `
     type Query {
-        search(location: String): [Business]
-        getDetail(alias: String): Detail
-        getReviews(alias: String): [Review]
-        hello: String
+      search(location: String, price: String, attributes: String, categories: String, radius: Int): [Business]
+      getDetail(alias: String): Detail
+      getReviews(alias: String): [Review]
     }
 
     type Hour {
-        open: [Time]
-        hours_type: String
-        is_open_now: Boolean
+      open: [Time]
+      hours_type: String
+      is_open_now: Boolean
     }
     
     type Business {
-        id: ID!
-        name: String
-        alias: String
-        categories: [Category]
-        hours: [Hour]
-        rating: Float
-        review_count: Int
-        display_phone: String
-        image_url: String
-        location: Location
-        is_closed: Boolean
-        transactions: [String]
-        price: String
+      id: ID!
+      name: String
+      alias: String
+      categories: [Category]
+      hours: [Hour]
+      rating: Float
+      review_count: Int
+      display_phone: String
+      image_url: String
+      location: Location
+      is_closed: Boolean
+      transactions: [String]
+      price: String
     }
 
     type Category {
@@ -39,27 +38,25 @@ const typeDefs = `
     }
 
     type Time {
-        is_overnight: Boolean
-        start: Int
-        end: Int
-        day: Int
+      is_overnight: Boolean
+      start: Int
+      end: Int
+      day: Int
     }
 
-    
-
     type Detail {
-        id: ID!
-        name: String
-        alias: String
-        rating: Float
-        is_closed: String
-        photos: [String]
-        hours:[Hour]
-        price: String
-        review_count: Int
-        display_phone: String
-        image_url: String
-        location: Location
+      id: ID!
+      name: String
+      alias: String
+      rating: Float
+      is_closed: String
+      photos: [String]
+      hours:[Hour]
+      price: String
+      review_count: Int
+      display_phone: String
+      image_url: String
+      location: Location
     }
 
     type Location {
@@ -67,26 +64,26 @@ const typeDefs = `
     }
 
     type User {
-        id: ID!
-        name: String
-        profile_url: String
-        image_url: String
+      id: ID!
+      name: String
+      profile_url: String
+      image_url: String
     }
 
     type Review {
-        id: ID!
-        rating: Float
-        user: User
-        text: String
-        time_created: String
+      id: ID!
+      rating: Float
+      user: User
+      text: String
+      time_created: String
     }
 `;
 
 const resolvers = {
   Query: {
-    hello: () => "hello",
-    search: async (_, { location }) => {
-      const resp = await client.search({ location, limit: 10 });
+    search: async (_, filters) => {
+      console.log(filters);
+      const resp = await client.search({ ...filters, limit: 10 });
       return resp.jsonBody.businesses;
     },
     getDetail: async (_, { alias }) => {

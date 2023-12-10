@@ -1,9 +1,9 @@
+import { useRef, useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.module.scss";
 import cx from "classnames";
 import Car from "@public/car.png";
 import Image from "next/image";
-import { useRef, useState, useEffect, Fragment } from "react";
 import {
   KEY_PRICE,
   KEY_CATEGORIES,
@@ -14,6 +14,7 @@ import {
   categories,
   radius,
 } from "@const/index";
+import Loading from "@components/dumb/loading";
 
 /**
  * Filter component for displaying and handling business filters.
@@ -23,6 +24,9 @@ import {
  * @param {Function} setFilter - A function to update the filters.
  * @param {number} filtersQuantity - The quantity of active filters.
  * @param {Boolean} isSearchMobileOpen - Indicates whether the filter is open or closed in mobile.
+ * @param {Function} setIsSearchMobileOpen - A function to update the var isSearchMobileOpen
+ * @param {boolean} isLoading - Indicates whether the filter is loading
+ * @param {boolean} businessQuantity - Indicates how many business were found
  * @returns {JSX.Element} The rendered Filter component.
  */
 const Filter = ({
@@ -30,6 +34,9 @@ const Filter = ({
   setFilter,
   filtersQuantity,
   isSearchMobileOpen,
+  setIsSearchMobileOpen,
+  isLoading,
+  businessQuantity,
 }) => {
   const [classToAdd, setClassToAdd] = useState("");
   const [showMore, setShowMore] = useState(false);
@@ -100,6 +107,14 @@ const Filter = ({
           left: isFixed ? ref.current.getBoundingClientRect().left + "px" : 0,
         }}
       >
+        <div className={styles.showResultsMobile}>
+          <p>Results:</p>
+          {isLoading ? (
+            <Loading className={styles.loading} width={20} height={20} />
+          ) : (
+            <p className={styles.businessQuantity}>{businessQuantity}</p>
+          )}
+        </div>
         <p className={styles.title}>{filtersQuantity} Filters</p>
         {Boolean(filtersQuantity) && (
           <p
@@ -193,15 +208,21 @@ const Filter = ({
               <div
                 key={key}
                 className={cx(styles.point, {
-                  [styles.selected]: key === filterRadius,
+                  [styles.selected]: Number(key) === filterRadius,
                 })}
-                onClick={() => handleDistance(key, i)}
+                onClick={() => handleDistance(Number(key), i)}
               >
                 <p>{radius[key]}.</p>
               </div>
             ))}
           </div>
         </div>
+        <button
+          className={styles.button}
+          onClick={() => setIsSearchMobileOpen(false)}
+        >
+          Close
+        </button>
       </aside>
     </Fragment>
   );
@@ -211,6 +232,9 @@ Filter.propTypes = {
   filters: PropTypes.object.isRequired,
   setFilter: PropTypes.func.isRequired,
   filtersQuantity: PropTypes.number.isRequired,
+  setIsSearchMobileOpen: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  businessQuantity: PropTypes.number.isRequired,
 };
 
 export default Filter;

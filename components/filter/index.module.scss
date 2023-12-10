@@ -253,6 +253,30 @@
       }
     }
   }
+  .button {
+    margin: auto;
+    border: 3px solid #d4d4d4;
+    color: #000;
+    background-color: #fff;
+    padding: 5px 40px;
+    border-radius: 15px;
+    display: flex;
+    font-weight: bold;
+    margin-top: 40px;
+  }
+  .showResultsMobile {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    .businessQuantity{
+      padding-left: 5px;
+    }
+  }
+  .loading {
+    padding: 0 !important;
+    
+  }
 }
 
 
@@ -279,6 +303,12 @@
       margin-left: 20px;
       margin-top: 10px;
     }
+    .showResultsMobile {
+      display: none;
+    }
+    .button {
+      display: none;
+    }
   }
   .placeHolder {
     width: 100%;
@@ -290,4 +320,5 @@
     position: relative;
     top: 200px;
   }
+  
 }

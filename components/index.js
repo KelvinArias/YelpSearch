@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import styles from "./index.module.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -57,11 +57,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     businessDetail,
     isLoadingDetail,
   } = data;
-
-  const handleInit = () => {
-    getBusiness(searchValue);
-    initLoading({ isLoading: true });
-  };
+  const notFound = businesses.length === 0;
 
   const handleViewBusiness = ({ alias }) => {
     getDetail(alias);
@@ -70,7 +66,12 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     setOpen(true);
   };
 
-  useEffect(handleInit, [searchValue, getBusiness, initLoading]);
+  useEffect(() => {
+    const newFilter = { ...filters, location: searchValue };
+    getBusiness(newFilter);
+    initLoading({ isLoading: true });
+  }, [searchValue, filters, getBusiness, initLoading]);
+
   const handleSearch = (newValue) => {
     if (!newValue) {
       return setIsSearchMobileOpen(true);
@@ -87,39 +88,49 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
         isSearchMobileOpen={isSearchMobileOpen}
         filterQuantity={filtersQuantity}
       />
-      <TitleSearch
-        searchValue={searchValue}
-        sortValue={sortValue}
-        setSort={setSort}
-      />
-      <div className={styles.content}>
-        <div className={cx("container", styles.contentContainer)}>
-          <Filter
-            filters={filters}
-            setFilter={setFilter}
-            filtersQuantity={filtersQuantity}
-            isSearchMobileOpen={isSearchMobileOpen}
-          />
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <section
-              className={cx(styles.cardContainer, {
-                [styles.isSearchMobileOpen]: isSearchMobileOpen,
-              })}
-            >
-              {businesses.map((business, i) => (
-                <Card
-                  business={business}
-                  key={business.id}
-                  viewBusiness={handleViewBusiness}
-                  viewed={viewedBusinesses.includes(business.id)}
-                />
-              ))}
-            </section>
-          )}
+
+      <Fragment>
+        <TitleSearch
+          searchValue={searchValue}
+          sortValue={sortValue}
+          setSort={setSort}
+        />
+        <div className={styles.content}>
+          <div className={cx("container", styles.contentContainer)}>
+            <Filter
+              filters={filters}
+              setFilter={setFilter}
+              filtersQuantity={filtersQuantity}
+              isSearchMobileOpen={isSearchMobileOpen}
+              setIsSearchMobileOpen={setIsSearchMobileOpen}
+              isLoading={isLoading}
+              businessQuantity={businesses.length}
+            />
+            {isLoading ? (
+              <Loading width={100} height={100} />
+            ) : notFound ? (
+              <p className={styles.notFound}>
+                There are not results for this search
+              </p>
+            ) : (
+              <section
+                className={cx(styles.cardContainer, {
+                  [styles.isSearchMobileOpen]: isSearchMobileOpen,
+                })}
+              >
+                {businesses.map((business, i) => (
+                  <Card
+                    business={business}
+                    key={business.id}
+                    viewBusiness={handleViewBusiness}
+                    viewed={viewedBusinesses.includes(business.id)}
+                  />
+                ))}
+              </section>
+            )}
+          </div>
         </div>
-      </div>
+      </Fragment>
 
       {/*
       {openDetail && (

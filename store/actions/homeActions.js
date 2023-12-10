@@ -2,11 +2,25 @@ import * as TYPE from "../types";
 const endpoint = "http://localhost:4000/graphql";
 import { GraphQLClient } from "graphql-request";
 
-export const getBusiness = (location) => async (dispatch) => {
+export const getBusiness = (filters) => async (dispatch) => {
+  let formatFilters = ``;
+  Object.keys(filters).forEach((key) => {
+    // Transform the arrays into strings separated by spaces
+    if (Array.isArray(filters[key])) {
+      formatFilters += `, ${key}: "${filters[key].join(",")}"`;
+    }
+    if (typeof filters[key] === "number") {
+      formatFilters += `, ${key}: ${filters[key]}`;
+    }
+    if (typeof filters[key] === "string") {
+      formatFilters += `, ${key}: "${filters[key]}"`;
+    }
+  });
+
   try {
     const query = `
             {
-                search(location: "${location}"){
+                search(${formatFilters}){
                     id
                     name
                     alias
@@ -33,6 +47,10 @@ export const getBusiness = (location) => async (dispatch) => {
       payload: data.search,
     });
   } catch (error) {
+    dispatch({
+      type: TYPE.SET_BUSINESS,
+      payload: [],
+    });
     console.log(error);
   }
 };
