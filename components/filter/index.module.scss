@@ -1,17 +1,18 @@
 .filter {
   position: fixed;
   top: 88px;
-  left: 0;
+  right: 100%;
   background: #fff;
   width: 100%;
   height: calc(100vh - 88px);
+  transform: translateX(-100%);
   z-index: 3;
   padding: 30px 20px;
   font-size: 16px;
   overflow: scroll;
-  display: none;
+  transition: .3s all;
   &.isSearchMobileOpen {
-    display: block;
+    transform: translateX(0);
   }
   .title {
     font-weight: bold;
@@ -267,7 +268,7 @@
   .showResultsMobile {
     display: flex;
     position: absolute;
-    top: 20px;
+    top: 15px;
     right: 20px;
     .businessQuantity{
       padding-left: 5px;
@@ -295,6 +296,7 @@
     left: 0;
     overflow-y: scroll;
     margin-left: 20px;
+    transform: translateX(0);
     &.isFixed {
       position: fixed;
       top: 100px;

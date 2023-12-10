@@ -7,6 +7,7 @@
   border-radius: 15px;
   transition: .3s all;
   box-sizing: border-box;
+  animation: show .5s forwards;
   cursor: pointer;
   .header {
     width: 100%;
@@ -85,6 +86,17 @@
         text-transform: capitalize;
       }
     }
+  }
+}
+
+@keyframes show {
+  from {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 

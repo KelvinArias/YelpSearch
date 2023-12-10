@@ -2,6 +2,7 @@
   background-color: red;
   display: flex;
   justify-content: center;
+  position: relative;
   .mof {
     margin: 0;
     padding: 20px;
@@ -15,6 +16,7 @@
       top: 50%;
       left: 20px;
       transform: translateY(-50%);
+      transition: .3s all;
     }
     .search {
       box-shadow: 1px 1px 10px rgb(0 0 0 / 50%);
@@ -24,6 +26,7 @@
       background-color: white;
       width: 55px;
       position: relative;
+      transition: .3s all;
       .tag {
         position: absolute;
         background-color: white;
@@ -58,26 +61,27 @@
       }
     }
   }
-}
-
-@media (max-width: 992px) {
-  .header.isSearchMobileOpen {
-    position: relative;
-    .mof{
-      .logo {
-        animation: move .5s forwards;
+  &.isSearchMobileOpen {
+    .mof {
+        .logo {
+          transform: translateY(-50%) translateX(-100px);
+          position: absolute;
+        }
+    
+        form {
+          width: 100%;
+          opacity: 1;
+          order: 2;
+        }
+    
+        .search {
+          width: 100%;
+        }
       }
-      form {
-        width: 100%;
-        opacity: 1;
-        order: 2;
-      }
-      .search {
-        animation: show .5s forwards;
-      }
-    }
   }
 }
+
+
 
 @keyframes move {
   to {
@@ -115,6 +119,7 @@
       .logo,
       .search {
         animation: initial;
+        transform: initial;
       }
       .search {
         width: 500px;

@@ -29,9 +29,7 @@ const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
           <Image
             width={80}
             height={40}
-            src={
-              "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_design_web/48792dd29811/assets/img/logos_desktop/default.png"
-            }
+            src="https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_design_web/48792dd29811/assets/img/logos_desktop/default.png"
             alt="logo"
             className={styles.logo}
           />

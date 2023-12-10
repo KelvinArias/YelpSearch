@@ -88,7 +88,7 @@ const Card = ({ business }) => {
 
 Card.propTypes = {
   business: PropTypes.shape({
-    image_url: PropTypes.string.isRequired,
+    image_url: PropTypes.string,
     name: PropTypes.string.isRequired,
     location: PropTypes.shape({
       display_address: PropTypes.array.isRequired,
@@ -99,7 +99,7 @@ Card.propTypes = {
     rating: PropTypes.number.isRequired,
     is_closed: PropTypes.bool.isRequired,
     transactions: PropTypes.array.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.string,
   }),
 };
 
