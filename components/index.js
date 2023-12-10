@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Header from "./header";
 import TitleSearch from "./titleSearch";
-import { listValues } from "@const/index.js";
+import {
+  sortBy,
+  DEFAULT_SORT_VALUE,
+  DEFAULT_LOCATION_VALUE,
+} from "@const/index.js";
 import Card from "./card";
 import Loading from "./dumb/loading";
 import Filter from "./filter";
@@ -44,8 +48,8 @@ import { getFiltersQuantity } from "@libs/index.js";
  * @returns {JSX.Element} The rendered component.
  */
 const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
-  const [searchValue, setSearch] = useState("Seattle");
-  const [sortValue, setSort] = useState(listValues[0]);
+  const [searchValue, setSearch] = useState(DEFAULT_LOCATION_VALUE);
+  const [sortValue, setSort] = useState(DEFAULT_SORT_VALUE);
   const [isSearchMobileOpen, setIsSearchMobileOpen] = useState(false);
   const [filters, setFilter] = useState({});
   const filtersQuantity = getFiltersQuantity(filters);
@@ -67,10 +71,10 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   };
 
   useEffect(() => {
-    const newFilter = { ...filters, location: searchValue };
+    const newFilter = { ...filters, location: searchValue, sort_by: sortValue };
     getBusiness(newFilter);
     initLoading({ isLoading: true });
-  }, [searchValue, filters, getBusiness, initLoading]);
+  }, [searchValue, filters, sortValue, getBusiness, initLoading]);
 
   const handleSearch = (newValue) => {
     if (!newValue) {

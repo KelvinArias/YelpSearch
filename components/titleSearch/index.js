@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useClickOutside } from "@libs/index.js";
 import styles from "./index.module.scss";
 import cx from "classnames";
-import { listValues } from "@const/index.js";
+import { sortBy } from "@const/index.js";
 
 /**
  * TitleSearch component for displaying the title and sorting options.
@@ -30,11 +30,11 @@ const TitleSearch = ({ searchValue, sortValue, setSort }) => {
           onClick={() => setShowList(!showList)}
           ref={ref}
         >
-          <p>{sortValue}</p>
+          <p>{sortBy[sortValue]}</p>
           <div className={cx(styles.arrow, { [styles.rotate]: showList })} />
           {showList && (
             <ul className={styles.list}>
-              {listValues.map((value) => (
+              {Object.keys(sortBy).map((value) => (
                 <li
                   onClick={() => setSort(value)}
                   className={cx({ selected: sortValue === value })}
@@ -42,7 +42,7 @@ const TitleSearch = ({ searchValue, sortValue, setSort }) => {
                   role="option"
                   aria-selected={value}
                 >
-                  {value}
+                  {sortBy[value]}
                 </li>
               ))}
             </ul>

@@ -1,4 +1,3 @@
-export const listValues = ["Recommended", "Highest Rated", "Most Reviewed"];
 export const starsInfo = [
   { id: "star5", value: 5, htmlFor: "star5", title: "Awesome" },
   { id: "star4half", value: 4.5, htmlFor: "star4half", title: "pretty good" },
@@ -32,7 +31,15 @@ export const KEY_RADIUS = "radius";
 export const KEY_CATEGORIES = "categories";
 export const KEY_SUGGESTED = "attributes";
 export const KEY_PRICE = "price";
+export const DEFAULT_LOCATION_VALUE = "Seattle";
+export const DEFAULT_SORT_VALUE = "best_match";
 
+export const sortBy = {
+  best_match: "Best Match",
+  rating: "Rating",
+  review_count: "Review Count",
+  distance: "Distance",
+};
 export const prices = [1, 2, 3, 4];
 export const suggestedValues = {
   hot_and_new: "Popular",

@@ -119,7 +119,9 @@
       .logo,
       .search {
         animation: initial;
-        transform: initial;
+      }
+      .logo {
+        transform: translateY(-50%) !important;
       }
       .search {
         width: 500px;

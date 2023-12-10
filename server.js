@@ -6,7 +6,7 @@ const client = yelp.client(process.env.API_KEY);
 
 const typeDefs = `
     type Query {
-      search(location: String, price: String, attributes: String, categories: String, radius: Int): [Business]
+      search(location: String, price: String, attributes: String, categories: String, radius: Int, sort_by: String): [Business]
       getDetail(alias: String): Detail
       getReviews(alias: String): [Review]
     }

@@ -9,6 +9,8 @@ import Score from "../dumb/score";
 import Button from "../dumb/button";
 import CheckSvg from "@public/check";
 import PropTypes from "prop-types";
+import noFoundImage from "@public/noFoundImage.png";
+import cx from "classnames";
 
 /**
  * Card component for displaying business information.
@@ -44,9 +46,11 @@ const Card = ({ business }) => {
 
   return (
     <article className={styles.card}>
-      <header className={styles.header}>
+      <header
+        className={cx(styles.header, { [styles.noFoundImage]: !image_url })}
+      >
         <Image
-          src={image_url}
+          src={image_url || noFoundImage}
           alt="local image"
           width={400}
           height={400}
