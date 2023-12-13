@@ -1,6 +1,7 @@
 .content {
   display: flex;
   justify-content: center;
+  overflow: hidden;
   .contentContainer {
     display: flex;
     justify-content: flex-end;

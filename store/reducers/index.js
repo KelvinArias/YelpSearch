@@ -1,4 +1,5 @@
 "use client";
+import { DEFAULT_PAGE_VALUE } from "@const/index";
 import * as TYPES from "../types";
 //import dataExample from "./dataExample"
 
@@ -10,6 +11,7 @@ const initialState = {
   isLoading: true,
   isLoadingDetail: true,
   isLoadingReviews: true,
+  totalResults: 0,
 };
 
 export default function historyReducer(state = initialState, action) {
@@ -17,8 +19,9 @@ export default function historyReducer(state = initialState, action) {
     case TYPES.SET_BUSINESS:
       return {
         ...state,
-        businesses: action.payload,
         isLoading: false,
+        businesses: action.payload.businesses,
+        totalResults: action.payload.totalResults,
       };
     case TYPES.SET_REVIEWS:
       return {

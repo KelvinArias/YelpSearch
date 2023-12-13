@@ -21,36 +21,48 @@ export const getBusiness = (filters) => async (dispatch) => {
     const query = `
             {
                 search(${formatFilters}){
-                    id
-                    name
-                    alias
-                    categories{
-                      title
+                    businesses {
+                      id
+                      name
+                      alias
+                      categories{
+                        title
+                      }
+                      coordinates {
+                        latitude
+                        longitude
+                      }
+                      rating
+                      review_count
+                      display_phone
+                      image_url
+                      location{
+                        display_address
+                      }
+                      is_closed
+                      transactions
+                      price
                     }
-                    rating
-                    review_count
-                    display_phone
-                    image_url
-                    location{
-                      display_address
-                    }
-                    is_closed
-                    transactions
-                    price
+                    total
                 }
             }
         `;
     const graphQLClient = new GraphQLClient(endpoint, { method: "POST" });
     const data = await graphQLClient.request(query);
+    console.log(data);
     dispatch({
       type: TYPE.SET_BUSINESS,
-      payload: data.search,
+      payload: {
+        totalResults: data.search.total,
+        businesses: data.search.businesses,
+      },
     });
   } catch (error) {
+    /*
     dispatch({
       type: TYPE.SET_BUSINESS,
       payload: [],
-    });
+    });*/
     console.log(error);
   }
 };

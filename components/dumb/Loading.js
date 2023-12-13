@@ -11,19 +11,16 @@ import cx from "classnames";
  * @component
  * @returns {JSX.Element} The rendered Loading component.
  */
-const Loading = ({ width, height, className }) => {
-  console.log({ className });
-  return (
-    <div
-      className={cx(
-        "container pt-5 pb-5 d-flex align-center justify-content-center",
-        { [className]: className }
-      )}
-    >
-      <Image src={loadingSvg} alt="Loader" width={width} height={height} />
-    </div>
-  );
-};
+const Loading = ({ width, height, className }) => (
+  <div
+    className={cx(
+      "container pt-5 pb-5 d-flex align-center justify-content-center",
+      { [className]: className }
+    )}
+  >
+    <Image src={loadingSvg} alt="Loader" width={width} height={height} />
+  </div>
+);
 
 Loading.propTypes = {
   width: PropTypes.number.isRequired,

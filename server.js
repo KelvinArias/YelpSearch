@@ -6,9 +6,14 @@ const client = yelp.client(process.env.API_KEY);
 
 const typeDefs = `
     type Query {
-      search(location: String, price: String, attributes: String, categories: String, radius: Int, sort_by: String): [Business]
+      search(location: String, latitude: Float, longitude: Float, price: String, attributes: String, categories: String, radius: Int, sort_by: String, limit: Int, offset: Int): SearchResult
       getDetail(alias: String): Detail
       getReviews(alias: String): [Review]
+    }
+
+    type SearchResult {
+      businesses: [Business]
+      total: Int
     }
 
     type Hour {
@@ -22,6 +27,7 @@ const typeDefs = `
       name: String
       alias: String
       categories: [Category]
+      coordinates: Coordinate
       hours: [Hour]
       rating: Float
       review_count: Int
@@ -31,6 +37,11 @@ const typeDefs = `
       is_closed: Boolean
       transactions: [String]
       price: String
+    }
+
+    type Coordinate {
+      latitude: Float
+      longitude: Float
     }
 
     type Category {
@@ -82,9 +93,11 @@ const typeDefs = `
 const resolvers = {
   Query: {
     search: async (_, filters) => {
-      console.log(filters);
-      const resp = await client.search({ ...filters, limit: 10 });
-      return resp.jsonBody.businesses;
+      const resp = await client.search(filters);
+      return {
+        businesses: resp.jsonBody.businesses,
+        total: resp.jsonBody.total,
+      };
     },
     getDetail: async (_, { alias }) => {
       const resp = await client.business(alias);

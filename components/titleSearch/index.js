@@ -1,21 +1,24 @@
 "use client";
+import React from "react";
 import PropTypes from "prop-types";
 import { useState, useRef } from "react";
-import { useClickOutside } from "@libs/index.js";
+import { useClickOutside } from "@libs/index";
 import styles from "./index.module.scss";
 import cx from "classnames";
-import { sortBy } from "@const/index.js";
+import { sortBy } from "@const/index";
+import { DEFAULT_LOCATION_VALUE } from "@const/index";
 
 /**
  * TitleSearch component for displaying the title and sorting options.
  *
  * @component
- * @param {string} searchValue - The current search value.
+ * @param {string} location - The current search value.
  * @param {string} sortValue - The current sort value.
  * @param {Function} setSort - A function to update the sort value.
+ * @param {Boolean} isCurrentLocation - Whether the user is using the current location or not.
  * @returns {JSX.Element} The rendered TitleSearch component.
  */
-const TitleSearch = ({ searchValue, sortValue, setSort }) => {
+const TitleSearch = ({ location, sortValue, setSort, isCurrentLocation }) => {
   const [showList, setShowList] = useState(false);
   const ref = useRef(null);
   useClickOutside(ref, () => setShowList(false));
@@ -23,7 +26,9 @@ const TitleSearch = ({ searchValue, sortValue, setSort }) => {
   return (
     <section className={styles.titleSearch}>
       <div className={cx("container", styles.mof)}>
-        <h2 className="mb-0">{`Best Business in ${searchValue}`}</h2>
+        <h2 className="mb-0">{`Best Business in ${
+          isCurrentLocation ? "Your city" : location
+        }`}</h2>
         <div
           role="select"
           className={styles.select}
@@ -54,9 +59,10 @@ const TitleSearch = ({ searchValue, sortValue, setSort }) => {
 };
 
 TitleSearch.propTypes = {
-  searchValue: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
   sortValue: PropTypes.string.isRequired,
   setSort: PropTypes.func.isRequired,
+  isCurrentLocation: PropTypes.bool.isRequired,
 };
 
 export default TitleSearch;

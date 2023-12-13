@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { rating as ratingClass, half } from "./index.module.scss";
-import { starsInfo } from "@const/index.js";
+import { starsInfo } from "@const/index";
 import cx from "classnames";
 
 /**

@@ -25,8 +25,12 @@ export const starsInfo = [
   { id: "star1", value: 1, htmlFor: "star1", title: "Suck big time - 1 star" },
 ].sort((a, b) => a.value - b.value);
 
-// Filter
+// Pagination
+export const DEFAULT_PAGE_VALUE = 1;
+export const BUSINESS_PER_PAGE = 10;
+export const DOTS = "&#8230;";
 
+// Filter
 export const KEY_RADIUS = "radius";
 export const KEY_CATEGORIES = "categories";
 export const KEY_SUGGESTED = "attributes";

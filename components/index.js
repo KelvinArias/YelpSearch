@@ -1,19 +1,21 @@
 "use client";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import styles from "./index.module.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Header from "./header";
 import TitleSearch from "./titleSearch";
 import {
-  sortBy,
   DEFAULT_SORT_VALUE,
   DEFAULT_LOCATION_VALUE,
-} from "@const/index.js";
+  DEFAULT_PAGE_VALUE,
+  BUSINESS_PER_PAGE,
+} from "@const/index";
 import Card from "./card";
 import Loading from "./dumb/loading";
 import Filter from "./filter";
 import cx from "classnames";
+import { getCurrentLocation } from "@libs/index";
 /*
 import Detail from "./Detail";*/
 import {
@@ -22,7 +24,8 @@ import {
   initLoading,
   getDetail,
 } from "@store/actions/homeActions.js";
-import { getFiltersQuantity } from "@libs/index.js";
+import { getFiltersQuantity } from "@libs/index";
+import Pagination from "./pagination/test";
 
 /**
  * Principal Body of the website.
@@ -48,18 +51,27 @@ import { getFiltersQuantity } from "@libs/index.js";
  * @returns {JSX.Element} The rendered component.
  */
 const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
-  const [searchValue, setSearch] = useState(DEFAULT_LOCATION_VALUE);
+  const [location, setLocation] = useState(DEFAULT_LOCATION_VALUE);
   const [sortValue, setSort] = useState(DEFAULT_SORT_VALUE);
   const [isSearchMobileOpen, setIsSearchMobileOpen] = useState(false);
   const [filters, setFilter] = useState({});
+  const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_VALUE);
   const filtersQuantity = getFiltersQuantity(filters);
   const [openDetail, setOpen] = useState(false);
+  const [geolocation, setCurrentLocation] = useState({
+    status: false,
+    latitude: 0,
+    longitude: 0,
+  });
+  const isCurrentLocation =
+    geolocation.status && location === DEFAULT_LOCATION_VALUE;
   const {
     isLoading,
     businesses,
     viewedBusinesses,
     businessDetail,
     isLoadingDetail,
+    totalResults,
   } = data;
   const notFound = businesses.length === 0;
 
@@ -70,34 +82,74 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     setOpen(true);
   };
 
-  useEffect(() => {
-    const newFilter = { ...filters, location: searchValue, sort_by: sortValue };
-    getBusiness(newFilter);
-    initLoading({ isLoading: true });
-  }, [searchValue, filters, sortValue, getBusiness, initLoading]);
+  const handleSearch = (page = DEFAULT_PAGE_VALUE) => {
+    const { latitude, longitude, status } = geolocation;
+    const useCurrentLocation = location === DEFAULT_LOCATION_VALUE && status;
+    const newFilter = {
+      ...filters,
+      ...(useCurrentLocation ? { latitude, longitude } : { location }),
+      sort_by: sortValue,
+      limit: BUSINESS_PER_PAGE,
+      offset: page * BUSINESS_PER_PAGE - BUSINESS_PER_PAGE,
+    };
 
-  const handleSearch = (newValue) => {
+    initLoading({ isLoading: true });
+    getBusiness(newFilter);
+  };
+
+  useEffect(() => {
+    getCurrentLocation()
+      .then(({ latitude, longitude }) => {
+        setCurrentLocation({
+          latitude,
+          longitude,
+          status: true,
+          isLoading: false,
+        });
+      })
+      .catch((error) => {
+        console.error("Error getting location:", error);
+      });
+  }, [setCurrentLocation]);
+
+  useEffect(handleSearch, [
+    location,
+    filters,
+    sortValue,
+    getBusiness,
+    initLoading,
+    geolocation,
+  ]);
+
+  const handlePagination = (newPage) => {
+    handleSearch(newPage);
+    setCurrentPage(newPage);
+  };
+
+  const handleLocation = (newValue) => {
     if (!newValue) {
       return setIsSearchMobileOpen(true);
     }
     setIsSearchMobileOpen(false);
-    setSearch(newValue);
+    setLocation(newValue);
   };
+
   const handleClose = () => setOpen(false);
 
   return (
     <main>
       <Header
-        setSearch={handleSearch}
+        setSearch={handleLocation}
         isSearchMobileOpen={isSearchMobileOpen}
         filterQuantity={filtersQuantity}
       />
 
       <Fragment>
         <TitleSearch
-          searchValue={searchValue}
+          location={location}
           sortValue={sortValue}
           setSort={setSort}
+          isCurrentLocation={isCurrentLocation}
         />
         <div className={styles.content}>
           <div className={cx("container", styles.contentContainer)}>
@@ -128,8 +180,21 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
                     key={business.id}
                     viewBusiness={handleViewBusiness}
                     viewed={viewedBusinesses.includes(business.id)}
+                    geolocation={geolocation}
                   />
                 ))}
+                {/*
+                <Pagination
+                  currentPage={currentPage}
+                  setPage={setCurrentPage}
+                />*/}
+                <Pagination
+                  className="pagination-bar"
+                  currentPage={currentPage}
+                  totalCount={totalResults}
+                  pageSize={10}
+                  onPageChange={handlePagination}
+                />
               </section>
             )}
           </div>

@@ -65,3 +65,9 @@
   display: flex;
   align-items: center;
 }
+
+.disabledButton {
+  opacity: .3;
+  pointer-events: none;
+  cursor: none;
+}

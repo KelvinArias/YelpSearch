@@ -28,9 +28,13 @@ import cx from "classnames";
  * @param {boolean} business.is_closed - Indicates if the business is closed.
  * @param {Array} business.transactions - The transactions associated with the business.
  * @param {string} business.price - The price category of the business.
+ * @param {Object} geolocation - indicates the user's location
+ * @param {number} geolocation.latitude - Latitude of the geolocation
+ * @param {number} geolocation.longitude - longitude of the geolocation
+ * @param {boolean} geolocation.status - wether or not the geolocation is active
  * @returns {JSX.Element} The rendered Card component.
  */
-const Card = ({ business }) => {
+const Card = ({ business, geolocation }) => {
   const {
     image_url,
     name,
@@ -42,7 +46,16 @@ const Card = ({ business }) => {
     is_closed,
     transactions,
     price,
+    coordinates: { latitude, longitude },
   } = business;
+  const {
+    latitude: geoLatitude,
+    longitude: geoLongitude,
+    status,
+  } = geolocation;
+  const origin = status && `${geoLatitude},${geoLongitude}`;
+  const destination = latitude && longitude ? `${latitude},${longitude}` : "";
+  const directionsURL = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
 
   return (
     <article className={styles.card}>
@@ -65,7 +78,11 @@ const Card = ({ business }) => {
         </div>
         <div className={styles.direction}>
           <SignSVG is_closed={is_closed} size={50} />
-          <Button href="https://kresume.dev/" text="Get Directions" />
+          <Button
+            disabled={!origin}
+            href={directionsURL}
+            text="Get Directions"
+          />
         </div>
         <div className={styles.address}>
           <LocationSVG color={is_closed ? "#E00707" : "#008055"} size={20} />
@@ -104,6 +121,11 @@ Card.propTypes = {
     is_closed: PropTypes.bool.isRequired,
     transactions: PropTypes.array.isRequired,
     price: PropTypes.string,
+  }),
+  geolocation: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
   }),
 };
 
