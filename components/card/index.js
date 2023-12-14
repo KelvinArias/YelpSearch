@@ -28,10 +28,11 @@ import cx from "classnames";
  * @param {boolean} business.is_closed - Indicates if the business is closed.
  * @param {Array} business.transactions - The transactions associated with the business.
  * @param {string} business.price - The price category of the business.
- * @param {Object} geolocation - indicates the user's location
- * @param {number} geolocation.latitude - Latitude of the geolocation
- * @param {number} geolocation.longitude - longitude of the geolocation
- * @param {boolean} geolocation.status - wether or not the geolocation is active
+ * @param {Object} geolocation - indicates the user's location.
+ * @param {number} geolocation.latitude - Latitude of the geolocation.
+ * @param {number} geolocation.longitude - longitude of the geolocation.
+ * @param {boolean} geolocation.status - wether or not the geolocation is active.
+ * @param {boolean} geolocation.geoIsLoading - wether or not the geolocation is loading.
  * @returns {JSX.Element} The rendered Card component.
  */
 const Card = ({ business, geolocation }) => {
@@ -96,10 +97,10 @@ const Card = ({ business, geolocation }) => {
         </div>
         <div className={styles.transactions}>
           {transactions.map((transaction) => (
-            <Fragment key={transaction}>
+            <div key={transaction} className={styles.item}>
               <CheckSvg size={15} />
               <p>{transaction}</p>
-            </Fragment>
+            </div>
           ))}
         </div>
       </div>
@@ -126,6 +127,7 @@ Card.propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
+    geoIsLoading: PropTypes.bool.isRequired,
   }),
 };
 

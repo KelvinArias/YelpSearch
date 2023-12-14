@@ -62,6 +62,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     status: false,
     latitude: 0,
     longitude: 0,
+    geoIsLoading: true,
   });
   const isCurrentLocation =
     geolocation.status && location === DEFAULT_LOCATION_VALUE;
@@ -83,7 +84,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   };
 
   const handleSearch = (page = DEFAULT_PAGE_VALUE) => {
-    const { latitude, longitude, status } = geolocation;
+    const { latitude, longitude, status, geoIsLoading } = geolocation;
     const useCurrentLocation = location === DEFAULT_LOCATION_VALUE && status;
     const newFilter = {
       ...filters,
@@ -94,7 +95,9 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     };
 
     initLoading({ isLoading: true });
-    getBusiness(newFilter);
+    if (!geoIsLoading) {
+      getBusiness(newFilter);
+    }
   };
 
   useEffect(() => {
@@ -104,13 +107,18 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
           latitude,
           longitude,
           status: true,
-          isLoading: false,
+          geoIsLoading: false,
         });
       })
       .catch((error) => {
+        setCurrentLocation((prev) => ({
+          ...prev,
+          status: false,
+          geoIsLoading: false,
+        }));
         console.error("Error getting location:", error);
       });
-  }, [setCurrentLocation]);
+  }, []);
 
   useEffect(handleSearch, [
     location,
@@ -162,7 +170,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
               isLoading={isLoading}
               businessQuantity={businesses.length}
             />
-            {isLoading ? (
+            {isLoading || geolocation.geoIsLoading ? (
               <Loading width={100} height={100} />
             ) : notFound ? (
               <p className={styles.notFound}>
