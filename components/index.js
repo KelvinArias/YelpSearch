@@ -25,7 +25,7 @@ import {
   getDetail,
 } from "@store/actions/homeActions.js";
 import { getFiltersQuantity } from "@libs/index";
-import Pagination from "./pagination/test";
+import Pagination from "./pagination/";
 
 /**
  * Principal Body of the website.
@@ -191,11 +191,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
                     geolocation={geolocation}
                   />
                 ))}
-                {/*
-                <Pagination
-                  currentPage={currentPage}
-                  setPage={setCurrentPage}
-                />*/}
+
                 <Pagination
                   className="pagination-bar"
                   currentPage={currentPage}
