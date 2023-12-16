@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import styles from "./index.module.scss";
 import SignSVG from "@public/sign";
 import LocationSVG from "@public/location";
@@ -10,6 +9,7 @@ import Button from "../dumb/button";
 import CheckSvg from "@public/check";
 import PropTypes from "prop-types";
 import noFoundImage from "@public/noFoundImage.png";
+import { getMapDirection } from "@libs/index";
 import cx from "classnames";
 
 /**
@@ -33,10 +33,12 @@ import cx from "classnames";
  * @param {number} geolocation.longitude - longitude of the geolocation.
  * @param {boolean} geolocation.status - wether or not the geolocation is active.
  * @param {boolean} geolocation.geoIsLoading - wether or not the geolocation is loading.
+ * @param {function} onClick - show the details of the business
  * @returns {JSX.Element} The rendered Card component.
  */
-const Card = ({ business, geolocation }) => {
+const Card = ({ business, geolocation, onClick }) => {
   const {
+    alias,
     image_url,
     name,
     location,
@@ -47,19 +49,12 @@ const Card = ({ business, geolocation }) => {
     is_closed,
     transactions,
     price,
-    coordinates: { latitude, longitude },
+    coordinates,
   } = business;
-  const {
-    latitude: geoLatitude,
-    longitude: geoLongitude,
-    status,
-  } = geolocation;
-  const origin = status && `${geoLatitude},${geoLongitude}`;
-  const destination = latitude && longitude ? `${latitude},${longitude}` : "";
-  const directionsURL = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
+  const mapDirection = getMapDirection(coordinates, geolocation);
 
   return (
-    <article className={styles.card}>
+    <article className={styles.card} onClick={() => onClick(alias)}>
       <header
         className={cx(styles.header, { [styles.noFoundImage]: !image_url })}
       >
@@ -81,7 +76,7 @@ const Card = ({ business, geolocation }) => {
           <SignSVG is_closed={is_closed} size={50} />
           <Button
             disabled={!origin}
-            href={directionsURL}
+            href={mapDirection}
             text="Get Directions"
           />
         </div>
@@ -126,7 +121,7 @@ Card.propTypes = {
   geolocation: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
-    status: PropTypes.string.isRequired,
+    status: PropTypes.bool.isRequired,
     geoIsLoading: PropTypes.bool.isRequired,
   }),
 };

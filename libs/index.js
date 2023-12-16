@@ -1,28 +1,5 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { DOTS } from "@const/index";
-/**
- * Custom hook to handle click events outside a specified ref element.
- *
- * @function
- * @param {React.MutableRefObject} ref - Reference to the React element.
- * @param {Function} callback - Callback function to execute when a click outside occurs.
- * @returns {void}
- */
-export const useClickOutside = (ref, callback) => {
-  const handleClickOutside = (event) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      callback();
-    }
-  };
-
-  // Attach event listener when the hook is called
-  document.addEventListener("mousedown", handleClickOutside);
-
-  // Return a function to remove the event listener (cleanup)
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-};
 
 /**
  * Function to calculate the quantity of active filters.
@@ -149,4 +126,28 @@ export const getCurrentLocation = () => {
       reject("Geolocation is not supported by this browser.");
     }
   });
+};
+
+/**
+ * Function to calculate the quantity of active filters.
+ *
+ * @function
+ * @param {Object} coordinates - The business coordinates.
+ * @param {number} coordinates.latitude - The latitude of the business.
+ * @param {number} coordinates.longitude - The longitude of the business.
+ * @param {Object} geolocation - The current location of the user.
+ * @param {number} geolocation.latitude - the latitude of the user.
+ * @param {number} geolocation.longitude - the longitude of the user.
+ * @param {status} geolocation.status - indicates whether the geolocation is active or not.
+ * @returns {string} The quantity of active filters.
+ */
+export const getMapDirection = (
+  { latitude = 0, longitude = 0 },
+  { latitude: geoLatitude, longitude: geoLongitude, status }
+) => {
+  const origin = status && `${geoLatitude},${geoLongitude}`;
+  const destination = `${latitude},${longitude}`;
+  return status
+    ? `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`
+    : "";
 };

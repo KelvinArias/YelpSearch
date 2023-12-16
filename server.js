@@ -60,7 +60,7 @@ const typeDefs = `
       name: String
       alias: String
       rating: Float
-      is_closed: String
+      is_closed: Boolean
       photos: [String]
       hours:[Hour]
       price: String
@@ -68,6 +68,7 @@ const typeDefs = `
       display_phone: String
       image_url: String
       location: Location
+      coordinates: Coordinate
     }
 
     type Location {

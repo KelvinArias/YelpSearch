@@ -26,6 +26,7 @@ import {
 } from "@store/actions/homeActions.js";
 import { getFiltersQuantity } from "@libs/index";
 import Pagination from "./pagination/";
+import Detail from "./detail/";
 
 /**
  * Principal Body of the website.
@@ -76,7 +77,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   } = data;
   const notFound = businesses.length === 0;
 
-  const handleViewBusiness = ({ alias }) => {
+  const handleViewBusiness = (alias) => {
     getDetail(alias);
     getReviews(alias);
     initLoading({ isLoadingReviews: true, isLoadingDetail: true });
@@ -189,6 +190,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
                     viewBusiness={handleViewBusiness}
                     viewed={viewedBusinesses.includes(business.id)}
                     geolocation={geolocation}
+                    onClick={handleViewBusiness}
                   />
                 ))}
 
@@ -204,15 +206,21 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
           </div>
         </div>
       </Fragment>
-
-      {/*
       {openDetail && (
-        <Detail
-          closeDetail={handleClose}
-          business={businessDetail}
-          isLoading={isLoadingDetail}
-        />
-      )}*/}
+        <Fragment>
+          <div className={styles.mask} onClick={handleClose} />
+          {isLoadingDetail ? (
+            <Loading width={100} height={100} />
+          ) : (
+            <Detail
+              onClose={handleClose}
+              business={businessDetail}
+              isLoading={isLoadingDetail}
+              geolocation={geolocation}
+            />
+          )}
+        </Fragment>
+      )}
     </main>
   );
 };

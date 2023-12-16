@@ -1,12 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useState, useRef } from "react";
-import { useClickOutside } from "@libs/index";
 import styles from "./index.module.scss";
 import cx from "classnames";
 import { sortBy } from "@const/index";
-import { DEFAULT_LOCATION_VALUE } from "@const/index";
 
 /**
  * TitleSearch component for displaying the title and sorting options.
@@ -21,7 +19,22 @@ import { DEFAULT_LOCATION_VALUE } from "@const/index";
 const TitleSearch = ({ location, sortValue, setSort, isCurrentLocation }) => {
   const [showList, setShowList] = useState(false);
   const ref = useRef(null);
-  useClickOutside(ref, () => setShowList(false));
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowList(false);
+      }
+    };
+
+    // Attach event listener when the hook is called
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Return a function to remove the event listener (cleanup)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <section className={styles.titleSearch}>

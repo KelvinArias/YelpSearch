@@ -1,46 +1,6 @@
-import { render, act } from "@testing-library/react";
-import React, { useRef } from "react";
-import { useClickOutside, getFiltersQuantity } from "./index.js"; // Replace with the correct path
+import { getFiltersQuantity } from "./index.js"; // Replace with the correct path
 
-// Mock callback function
-const mockCallback = jest.fn();
-
-// Mock the useRef hook
-jest.mock("react", () => ({
-  ...jest.requireActual("react"),
-  useRef: jest.fn(),
-}));
-
-describe("useClickOutside", () => {
-  it("should call the callback when a click outside the ref element occurs", () => {
-    // Arrange
-    const ref = { current: document.createElement("div") };
-    useRef.mockReturnValue(ref);
-
-    render(
-      <div>
-        <div data-testid="inside-element" ref={ref}>
-          Inside Element
-        </div>
-        <div data-testid="outside-element">Outside Element</div>
-      </div>
-    );
-
-    // Act
-    act(() => {
-      // Initialize the hook
-      const cleanup = useClickOutside(ref, mockCallback);
-
-      // Simulate a click outside the ref element
-      document.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
-    });
-
-    // Assert
-    expect(mockCallback).toHaveBeenCalled();
-  });
-});
-
-describe("useClickOutside", () => {
+describe("getFiltersQuantity", () => {
   // Test case 1: No filters
   test("No filters", () => {
     const filters = {};

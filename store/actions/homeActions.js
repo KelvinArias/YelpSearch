@@ -49,7 +49,7 @@ export const getBusiness = (filters) => async (dispatch) => {
         `;
     const graphQLClient = new GraphQLClient(endpoint, { method: "POST" });
     const data = await graphQLClient.request(query);
-    console.log(data);
+
     dispatch({
       type: TYPE.SET_BUSINESS,
       payload: {
@@ -58,11 +58,13 @@ export const getBusiness = (filters) => async (dispatch) => {
       },
     });
   } catch (error) {
-    /*
     dispatch({
       type: TYPE.SET_BUSINESS,
-      payload: [],
-    });*/
+      payload: {
+        totalResults: 0,
+        businesses: [],
+      },
+    });
     console.log(error);
   }
 };
@@ -110,6 +112,10 @@ export const getDetail = (alias) => async (dispatch) => {
             alias
             rating
             is_closed
+            coordinates {
+              latitude
+              longitude
+            }
             hours{
                 open{
                     is_overnight

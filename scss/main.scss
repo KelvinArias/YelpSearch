@@ -99,29 +99,11 @@ body {
 }
 
 ::-webkit-scrollbar:vertical {
-  width: 10px;
+  width: 0px;
 }
 
 ::-webkit-scrollbar-button:increment {
   display: none
-}
-
-::-webkit-scrollbar-button {
-  display: none
-}
-
-::-webkit-scrollbar:horizontal {
-  height: 12px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #a6aaaf;
-  border-radius: 20px;
-  border: 2px solid #f1f2f3
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 10px;
 }
 
 @mixin transform($property) {
