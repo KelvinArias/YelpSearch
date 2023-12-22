@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 const Map = ({ latitude, longitude }) => {
   const { isLoaded } = useJsApiLoader({
     id: "d24e27d5c81cb08f",
-    googleMapsApiKey: "AIzaSyBoITWH_i3mBO2m1XVEuENpfnldiztclxA",
+    googleMapsApiKey: process.env.MAP_API_KEY,
   });
 
   const mapContainerStyle = {
@@ -35,7 +35,9 @@ const Map = ({ latitude, longitude }) => {
     >
       <Marker position={center} />
     </GoogleMap>
-  ) : null;
+  ) : (
+    <div style={mapContainerStyle} />
+  );
 };
 
 Map.propTypes = {

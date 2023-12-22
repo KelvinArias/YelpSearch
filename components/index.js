@@ -70,17 +70,19 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   const {
     isLoading,
     businesses,
+    businessReviews,
     viewedBusinesses,
     businessDetail,
     isLoadingDetail,
     totalResults,
+    isLoadingReviews,
   } = data;
   const notFound = businesses.length === 0;
 
   const handleViewBusiness = (alias) => {
+    initLoading({ isLoadingReviews: true, isLoadingDetail: true });
     getDetail(alias);
     getReviews(alias);
-    initLoading({ isLoadingReviews: true, isLoadingDetail: true });
     setOpen(true);
   };
 
@@ -187,7 +189,6 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
                   <Card
                     business={business}
                     key={business.id}
-                    viewBusiness={handleViewBusiness}
                     viewed={viewedBusinesses.includes(business.id)}
                     geolocation={geolocation}
                     onClick={handleViewBusiness}
@@ -217,6 +218,8 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
               business={businessDetail}
               isLoading={isLoadingDetail}
               geolocation={geolocation}
+              reviews={businessReviews}
+              isLoadingReviews={isLoadingReviews}
             />
           )}
         </Fragment>

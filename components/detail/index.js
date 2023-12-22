@@ -6,10 +6,12 @@ import Image from "next/image";
 import SignSVG from "@public/sign";
 import Score from "../dumb/score";
 import noFoundImage from "@public/noFoundImage.png";
+import defaultUserAvatar from "@public/defaultUserAvatar.png";
 import Map from "../dumb/map";
 import Button from "../dumb/button";
 import { getMapDirection } from "@libs/index";
 import Loading from "@components/dumb/loading";
+import Stars from "@components/dumb/Stars";
 
 /**
  * Tag component for rendering a clickable tag.
@@ -17,7 +19,14 @@ import Loading from "@components/dumb/loading";
  * @component
  * @returns {JSX.Element} The rendered Tag component.
  */
-const Detail = ({ business, onClose, isLoading, geolocation }) => {
+const Detail = ({
+  business,
+  onClose,
+  isLoading,
+  geolocation,
+  reviews,
+  isLoadingReviews,
+}) => {
   const [showPhone, setShowPhone] = useState(false);
   const {
     image_url,
@@ -32,6 +41,7 @@ const Detail = ({ business, onClose, isLoading, geolocation }) => {
     location,
   } = business;
   const [imageSelected, setImageSelected] = useState(image_url);
+  console.log({ reviews, isLoadingReviews });
 
   return (
     <section className={styles.detail}>
@@ -104,6 +114,35 @@ const Detail = ({ business, onClose, isLoading, geolocation }) => {
               </div>
             </div>
             <div className={styles.hours}></div>
+          </div>
+          <div className={styles.reviews}>
+            <h3>Recommended Reviews</h3>
+            {isLoadingReviews ? (
+              <Loading />
+            ) : (
+              reviews.map((review) => (
+                <div className={styles.review} key={review.id}>
+                  <div className={styles.user}>
+                    <div className={styles.portrait}>
+                      <Image
+                        src={review.user.image_url || defaultUserAvatar}
+                        alt="user image"
+                        width={100}
+                        height={100}
+                        className={styles.img}
+                      />
+                    </div>
+                    <div className={styles.rating}>
+                      <p className={styles.userName}>{review.user.name}</p>
+                      <Stars rating={review.rating} />
+                    </div>
+                  </div>
+                  <div className={styles.comment}>
+                    <p>{review.text}</p>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </article>

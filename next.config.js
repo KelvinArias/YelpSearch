@@ -27,6 +27,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "s3-media4.fl.yelpcdn.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.yelp.com",
+      },
     ],
   },
 };

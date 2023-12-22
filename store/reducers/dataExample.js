@@ -1,157 +1,415 @@
-const dataExample = [
-    {
-        "id": "6I28wDuMBR5WLMqfKxaoeg",
-        "name": "Pike Place Chowder",
-        "alias": "pike-place-chowder-seattle",
-        "rating": 4.5,
-        "review_count": 7453,
-        "display_phone": "(206) 267-2537",
-        "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/ZyQjV-wJQ2GHyX7l3jfbyg/o.jpg",
-        "location": {
-          "display_address": [
-            "1530 Post Aly",
-            "Ste 11",
-            "Seattle, WA 98101"
-          ]
-        }
+export const businesses = [
+  {
+    id: "rcP_maQ5-gr_i3tQ6J2oIg",
+    name: "Yardbird",
+    alias: "yardbird-miami-beach-3",
+    categories: [
+      {
+        title: "Southern",
       },
       {
-        "id": "NxwrJPJLzTs0k0DQ-QCo1A",
-        "name": "Piroshky Piroshky",
-        "alias": "piroshky-piroshky-seattle",
-        "rating": 4.5,
-        "review_count": 6259,
-        "display_phone": "(206) 441-6068",
-        "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/qGlIuj5yn6i82DK8kxw4Uw/o.jpg",
-        "location": {
-          "display_address": [
-            "1908 Pike Pl",
-            "Seattle, WA 98101"
-          ]
-        }
+        title: "New American",
       },
       {
-        "id": "VOPdG8llLPaga9iJxXcMuQ",
-        "name": "The Pink Door",
-        "alias": "the-pink-door-seattle-4",
-        "rating": 4.5,
-        "review_count": 5235,
-        "display_phone": "(206) 443-3241",
-        "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/RoFtoqtXRm3Y-znSHeMXIw/o.jpg",
-        "location": {
-          "display_address": [
-            "1919 Post Alley",
-            "Seattle, WA 98101"
-          ]
-        }
+        title: "Cocktail Bars",
+      },
+    ],
+    coordinates: {
+      latitude: 25.789106,
+      longitude: -80.140123,
+    },
+    rating: 4.5,
+    review_count: 6592,
+    display_phone: "(305) 538-5220",
+    image_url:
+      "https://s3-media1.fl.yelpcdn.com/bphoto/Gv60W555icEtTFfEJpHs0w/o.jpg",
+    location: {
+      display_address: ["1600 Lenox Ave", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "pickup"],
+    price: "$$$",
+  },
+  {
+    id: "0ojuKD3hhfNQvvFAOrVHCw",
+    name: "Havana 1957 Cuban Cuisine - Espanola Way",
+    alias: "havana-1957-cuban-cuisine-espanola-way-miami-beach-8",
+    categories: [
+      {
+        title: "Cuban",
       },
       {
-        "id": "Wk9f5Zpnu4T6Vzf6CF5iuA",
-        "name": "Paseo",
-        "alias": "paseo-seattle-11",
-        "rating": 4.5,
-        "review_count": 5143,
-        "display_phone": "(206) 545-7440",
-        "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/o5csrmtkMORuMcVBW2dnYg/o.jpg",
-        "location": {
-          "display_address": [
-            "4225 Fremont Ave N",
-            "Seattle, WA 98103"
-          ]
-        }
+        title: "Bars",
       },
       {
-        "id": "CKxp6p22ipCo94iLieXzbQ",
-        "name": "Ellenos Real Greek Yogurt",
-        "alias": "ellenos-real-greek-yogurt-seattle",
-        "rating": 5,
-        "review_count": 1892,
-        "display_phone": "(206) 535-7562",
-        "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/jsZkRaDQ6aEa6jwRGWDi5Q/o.jpg",
-        "location": {
-          "display_address": [
-            "1500 Pike Pl",
-            "Seattle, WA 98101"
-          ]
-        }
+        title: "Breakfast & Brunch",
+      },
+    ],
+    coordinates: {
+      latitude: 25.7870557868741,
+      longitude: -80.13192403819708,
+    },
+    rating: 4,
+    review_count: 3505,
+    display_phone: "(305) 503-3828",
+    image_url:
+      "https://s3-media4.fl.yelpcdn.com/bphoto/A1u1nLL12lQZ9TT06ykaxA/o.jpg",
+    location: {
+      display_address: ["405 Española Way", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "pickup"],
+    price: "$$",
+  },
+  {
+    id: "MqhOj3yewRWFRaFYEfooIA",
+    name: "Bolivar Restaurant Bar Lounge",
+    alias: "bolivar-restaurant-bar-lounge-miami-beach-9",
+    categories: [
+      {
+        title: "Colombian",
       },
       {
-        "id": "mMIQ5RG2-m_hc7X8HI4CYA",
-        "name": "Chihuly Garden and Glass",
-        "alias": "chihuly-garden-and-glass-seattle-2",
-        "rating": 4.5,
-        "review_count": 2397,
-        "display_phone": "(206) 753-4940",
-        "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/INeh7q6tnvCDJK19ahVEYQ/o.jpg",
-        "location": {
-          "display_address": [
-            "305 Harrison St",
-            "Seattle, WA 98109"
-          ]
-        }
+        title: "Lounges",
+      },
+    ],
+    coordinates: {
+      latitude: 25.779087,
+      longitude: -80.132824,
+    },
+    rating: 4.5,
+    review_count: 2510,
+    display_phone: "(305) 305-0801",
+    image_url:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/PCpamKIYfEGesG1vYvWB_A/o.jpg",
+    location: {
+      display_address: ["841 Washington Ave", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["pickup", "restaurant_reservation", "delivery"],
+    price: "$$",
+  },
+  {
+    id: "CDpuMPtliTAUUiztVXInWw",
+    name: "Pane & Vino",
+    alias: "pane-and-vino-miami-beach-2",
+    categories: [
+      {
+        title: "Italian",
+      },
+    ],
+    coordinates: {
+      latitude: 25.787173504467138,
+      longitude: -80.13196368486163,
+    },
+    rating: 4.5,
+    review_count: 1971,
+    display_phone: "(305) 535-9027",
+    image_url:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/X9o4Bx0PUs-Bvmnmh68D_w/o.jpg",
+    location: {
+      display_address: ["1450 Washington Ave", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "restaurant_reservation", "pickup"],
+    price: "$$",
+  },
+  {
+    id: "Yb0oWZEMl-53pC4R28ebnw",
+    name: "Limoncello Miami",
+    alias: "limoncello-miami-miami-beach",
+    categories: [
+      {
+        title: "Italian",
       },
       {
-        "id": "6ZKNFPLWRIVWshUkMNlgng",
-        "name": "Starbucks Reserve Roastery Seattle",
-        "alias": "starbucks-reserve-roastery-seattle-seattle",
-        "rating": 4.5,
-        "review_count": 3019,
-        "display_phone": "(206) 624-0173",
-        "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/Pxq-GrSvmQCjHxPoCLgsfw/o.jpg",
-        "location": {
-          "display_address": [
-            "1124 Pike St",
-            "Seattle, WA 98101"
-          ]
-        }
+        title: "Pizza",
+      },
+    ],
+    coordinates: {
+      latitude: 25.78487,
+      longitude: -80.13234,
+    },
+    rating: 4.5,
+    review_count: 307,
+    display_phone: "(305) 397-8226",
+    image_url:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/3_yNAjJVvgqxcOSik2vO-Q/o.jpg",
+    location: {
+      display_address: ["1334 Washington Ave", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["restaurant_reservation"],
+    price: "$$",
+  },
+  {
+    id: "iqSJ-Rj05mniEk9Um67Jow",
+    name: "La Ventana Colombian Restaurant",
+    alias: "la-ventana-colombian-restaurant-miami-beach-4",
+    categories: [
+      {
+        title: "Breakfast & Brunch",
       },
       {
-        "id": "FVzl8rDPiTWEtrNEuCu-Xg",
-        "name": "Storyville Coffee Company",
-        "alias": "storyville-coffee-company-seattle-9",
-        "rating": 4.5,
-        "review_count": 1763,
-        "display_phone": "(206) 780-5777",
-        "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/nJgiyjMZ7sglAtc5wyKSLQ/o.jpg",
-        "location": {
-          "display_address": [
-            "94 Pike St",
-            "Ste 34",
-            "Pike Place Market",
-            "Seattle, WA 98101"
-          ]
-        }
+        title: "Colombian",
       },
       {
-        "id": "aX2ctpgS9uvFDfdzCXjecA",
-        "name": "The Crumpet Shop",
-        "alias": "the-crumpet-shop-seattle",
-        "rating": 4.5,
-        "review_count": 2343,
-        "display_phone": "(206) 682-1598",
-        "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/nA5msGED9d3Bn5ldV2UgHA/o.jpg",
-        "location": {
-          "display_address": [
-            "1503 1st Ave",
-            "Seattle, WA 98101"
-          ]
-        }
+        title: "Seafood",
+      },
+    ],
+    coordinates: {
+      latitude: 25.77771,
+      longitude: -80.13371,
+    },
+    rating: 4.5,
+    review_count: 1336,
+    display_phone: "(305) 673-0912",
+    image_url:
+      "https://s3-media4.fl.yelpcdn.com/bphoto/CfjNjpuVTeGqYBi_NwQGkQ/o.jpg",
+    location: {
+      display_address: ["710 Washington Ave", "Ste 2", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "restaurant_reservation", "pickup"],
+    price: "$$",
+  },
+  {
+    id: "9hO6l76CqFscCE1jroaWMQ",
+    name: "Havana 1957 Cuban Cuisine Ocean Drive",
+    alias: "havana-1957-cuban-cuisine-ocean-drive-miami-beach",
+    categories: [
+      {
+        title: "Cuban",
       },
       {
-        "id": "mNdz7zdezTkiuk8S-cIKxg",
-        "name": "Beecher's Handmade Cheese",
-        "alias": "beechers-handmade-cheese-seattle",
-        "rating": 4.5,
-        "review_count": 2962,
-        "display_phone": "(206) 956-1964",
-        "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/hh5CwveJRABseaWt_UxtXA/o.jpg",
-        "location": {
-          "display_address": [
-            "1600 Pike Pl",
-            "Seattle, WA 98101"
-          ]
-        }
-      }
-]
+        title: "Bars",
+      },
+    ],
+    coordinates: {
+      latitude: 25.7854852124998,
+      longitude: -80.1298392960016,
+    },
+    rating: 4,
+    review_count: 1410,
+    display_phone: "(305) 763-8671",
+    image_url:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/rRTDzfnENZ6XeBzVG0QGkw/o.jpg",
+    location: {
+      display_address: ["1410 Ocean Dr", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "pickup"],
+    price: "$$",
+  },
+  {
+    id: "zBOnp3yK0Tafmwt79yaM9g",
+    name: "Il Pastaiolo",
+    alias: "il-pastaiolo-miami-beach",
+    categories: [
+      {
+        title: "Italian",
+      },
+      {
+        title: "Pizza",
+      },
+      {
+        title: "Beer, Wine & Spirits",
+      },
+    ],
+    coordinates: {
+      latitude: 25.782369,
+      longitude: -80.13161,
+    },
+    rating: 4.5,
+    review_count: 524,
+    display_phone: "(786) 362-0152",
+    image_url:
+      "https://s3-media4.fl.yelpcdn.com/bphoto/q_ypGpVSbmhf4_UHqK9Rjw/o.jpg",
+    location: {
+      display_address: ["1130 Collins", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "restaurant_reservation", "pickup"],
+    price: "$$",
+  },
+  {
+    id: "phZBxuaZMp7lvlNaHPOyUQ",
+    name: "La Sandwicherie - Miami Beach",
+    alias: "la-sandwicherie-miami-beach-miami-beach",
+    categories: [
+      {
+        title: "Sandwiches",
+      },
+      {
+        title: "French",
+      },
+      {
+        title: "Juice Bars & Smoothies",
+      },
+    ],
+    coordinates: {
+      latitude: 25.7854446,
+      longitude: -80.1310862,
+    },
+    rating: 4.5,
+    review_count: 3188,
+    display_phone: "(305) 532-8934",
+    image_url:
+      "https://s3-media4.fl.yelpcdn.com/bphoto/v0_UZAW17Bo3VWGKsASKHQ/o.jpg",
+    location: {
+      display_address: ["229 14th St", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery", "pickup"],
+    price: "$$",
+  },
+  {
+    id: "efXJ5842S-EBtAdlOOt9uA",
+    name: "Palace Bar & Restaurant",
+    alias: "palace-bar-miami-beach-2",
+    categories: [
+      {
+        title: "Gay Bars",
+      },
+      {
+        title: "Breakfast & Brunch",
+      },
+      {
+        title: "Dance Clubs",
+      },
+    ],
+    coordinates: {
+      latitude: 25.781225771622857,
+      longitude: -80.13065302943039,
+    },
+    rating: 4,
+    review_count: 646,
+    display_phone: "(305) 531-7234",
+    image_url:
+      "https://s3-media2.fl.yelpcdn.com/bphoto/4-B7kXr9Kh6-WuRkcCpXrQ/o.jpg",
+    location: {
+      display_address: ["1052 Ocean Dr", "Miami Beach, FL 33139"],
+    },
+    is_closed: false,
+    transactions: ["delivery"],
+    price: "$$",
+  },
+];
 
-export default dataExample
+export const businessDetail = {
+  id: "rcP_maQ5-gr_i3tQ6J2oIg",
+  name: "Yardbird",
+  alias: "yardbird-miami-beach-3",
+  rating: 4.5,
+  is_closed: false,
+  coordinates: {
+    latitude: 25.789106,
+    longitude: -80.140123,
+  },
+  hours: [
+    {
+      open: [
+        {
+          is_overnight: false,
+          start: 1100,
+          end: 2200,
+          day: 0,
+        },
+        {
+          is_overnight: false,
+          start: 1100,
+          end: 2200,
+          day: 1,
+        },
+        {
+          is_overnight: false,
+          start: 1100,
+          end: 2200,
+          day: 2,
+        },
+        {
+          is_overnight: false,
+          start: 1100,
+          end: 2200,
+          day: 3,
+        },
+        {
+          is_overnight: false,
+          start: 1100,
+          end: 2300,
+          day: 4,
+        },
+        {
+          is_overnight: false,
+          start: 1000,
+          end: 2300,
+          day: 5,
+        },
+        {
+          is_overnight: false,
+          start: 1000,
+          end: 2200,
+          day: 6,
+        },
+      ],
+      hours_type: "REGULAR",
+      is_open_now: true,
+    },
+  ],
+  photos: [
+    "https://s3-media1.fl.yelpcdn.com/bphoto/Gv60W555icEtTFfEJpHs0w/o.jpg",
+    "https://s3-media2.fl.yelpcdn.com/bphoto/sftazXPA-kk2sjoMdezvGQ/o.jpg",
+    "https://s3-media2.fl.yelpcdn.com/bphoto/zrm87xLWSkR2mxNGVA5G8A/o.jpg",
+  ],
+  price: "$$$",
+  review_count: 6592,
+  display_phone: "(305) 538-5220",
+  image_url:
+    "https://s3-media1.fl.yelpcdn.com/bphoto/Gv60W555icEtTFfEJpHs0w/o.jpg",
+  location: {
+    display_address: ["1600 Lenox Ave", "Miami Beach, FL 33139"],
+  },
+};
+
+export const businessReview = [
+  {
+    id: "EgoDfElA502WFy6yJMCknQ",
+    rating: 5,
+    user: {
+      id: "CSACi-fFW1WsUHAU5_sIhg",
+      name: "Sebastian C.",
+      profile_url:
+        "https://www.yelp.com/user_details?userid=CSACi-fFW1WsUHAU5_sIhg",
+      image_url:
+        "https://s3-media2.fl.yelpcdn.com/photo/zqXKwj7hP8swCRUQyJCUBg/o.jpg",
+    },
+    text: "Perfect blend of sweet and salty items. Great for brunch with friends after the beach!",
+    time_created: "2023-10-31 13:24:16",
+  },
+  {
+    id: "CscCCM3yETmdIpKjWm6oFg",
+    rating: 5,
+    user: {
+      id: "2btyHptOBJ5BW3H5sEKAog",
+      name: "Karisma S.",
+      profile_url:
+        "https://www.yelp.com/user_details?userid=2btyHptOBJ5BW3H5sEKAog",
+      image_url: null,
+    },
+    text: "Our visit at Yardbird was nothing short of amazing. Our server Matheus was hands down the best server! Very knowledgeable about the menu and took his time...",
+    time_created: "2023-11-11 10:24:28",
+  },
+  {
+    id: "-Y7aaxamCAXeVM4sRnsjEQ",
+    rating: 5,
+    user: {
+      id: "1Aott8ouE3S6T5UA4omkng",
+      name: "Gabriela P.",
+      profile_url:
+        "https://www.yelp.com/user_details?userid=1Aott8ouE3S6T5UA4omkng",
+      image_url: null,
+    },
+    text: "I met this guy Keyvon at the beach Saturday and he told us he was going to DJ at a place called Yardbird for Sunday brunch. Of course we said we are there!...",
+    time_created: "2023-10-29 10:37:47",
+  },
+];
