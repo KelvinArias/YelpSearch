@@ -2,21 +2,36 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 2;
-  display: block;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
-  overflow-y: overlay;
-  overflow-x: hidden;
   animation: show .5s forwards;
+  overflow-y: overlay;
+  .close {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 180px;
+  }
   .article {
-    margin-top: 179px;
+    margin-top: 180px;
     background-color: #fff;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    max-width: 768px;
     position: relative;
     z-index: 2;
   }
   header {
-    width: calc(100vw - 30px);
+    width: calc(100% - 20px);
     box-sizing: border-box;
     height: 200px;
     position: relative;
@@ -27,8 +42,9 @@
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    margin-bottom: -90px;
-    top: -90px;
+    margin-top: -92px;
+    margin-left: 10px;
+    margin-right: 10px;
     .information {
       color: #fff;
       border-radius: 0 0 15px 15px;
@@ -46,6 +62,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 250px;
+        margin-left: 5px;
       }
       .positionSign {
         position: absolute;
@@ -63,7 +80,7 @@
     }
   }
   .gallery {
-    width: 100vw;
+    width: 100%;
     display: flex;
     margin: 30px 0;
     box-sizing: border-box;
@@ -81,7 +98,8 @@
     }
     .imgSelected {
       border: 3px solid #027A97;
-      box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.3);
+      box-shadow: 5px 5px 10px #d4d4d4,
+        -5px -5px 10px #fff;
     }
     &::after{
       position: absolute;
@@ -103,7 +121,9 @@
       color: white;
       font-size: 24px;
       border: none;
-      box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.3);
+      cursor: pointer;
+      box-shadow: 5px 5px 10px #d4d4d4,
+        -5px -5px 10px #fff;
       &.showPhone {
           background-color: #fff;
           color: #000;
@@ -113,10 +133,57 @@
     }
     .location {
       position: relative;
+      
+      h3 {
+        width: 100%;
+      }
       .map {
         position: relative;
         border-radius: 15px;
         overflow: hidden;
+        box-shadow: 5px 5px 10px #d4d4d4, -5px -5px 10px #fff;
+        max-width: 345px;
+        width: 100%;
+        margin: auto;
+      }
+      .hours {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        border-radius: 25px;
+        box-shadow: 5px 5px 10px #d4d4d4, -5px -5px 10px #fff;
+        border: 1px solid #d4d4d4;
+        width: 100%;
+        max-width: 345px;
+        margin: auto;
+        margin-top: 20px;
+        table {
+          width: 100%;
+          padding: 20px;
+          box-sizing: border-box;
+          .isOpenToday {
+            color: #008055;
+          }
+          .isClosedToday{
+            color: #E00707;
+          }
+          td:first-child {
+            font-weight: bold;
+          }
+          td:nth-child(2) {
+            position: relative;
+            &::after {
+              content: "-";
+              position: absolute;
+              right: -13px;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
+          td:nth-child(1n+2) {
+            text-align: right;
+          }
+        }
       }
       .infoAddress {
         position: absolute;
@@ -208,4 +275,73 @@
   inset: 0px;
   object-fit: cover;
   color: transparent;
+}
+
+@media (min-width: 575px) {
+  .detail {
+    .article {
+      .header {
+        height: 300px;
+      }
+      .gallery {
+        .item {
+          height: 90px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .detail {
+    .article {
+      margin-top: 168px;
+      border-radius: 30px 30px 0 0;
+      .header {
+        height: 400px;
+        margin-top: -80px;
+        .information {
+          height: 100px;
+          position: relative;
+          .positionSign {
+            top: 5px;
+          }
+          .price {
+            position: relative;
+            right: initial;
+            bottom: initial;
+            margin-left: 5px;
+          }
+        }
+      }
+      .gallery {
+        .item {
+          height: 100px;
+        }
+      }
+      .content {
+        .location {
+          display: flex;
+          flex-wrap: wrap;
+          .book {
+            order: 4;
+            width: 345px;
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+          }
+          .map {
+            width: calc(50% - 5px);
+            max-width: none;
+            height: 300px;
+          }
+          .hours {
+            margin-top: 0;
+            margin-left: 10px;
+            
+          }
+        }
+      }
+    }
+  }
 }

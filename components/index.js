@@ -162,8 +162,12 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
           setSort={setSort}
           isCurrentLocation={isCurrentLocation}
         />
-        <div className={styles.content}>
-          <div className={cx("container", styles.contentContainer)}>
+        <div className={cx(styles.content)}>
+          <div
+            className={cx("container", styles.contentContainer, {
+              [styles.isOpenDetail]: openDetail,
+            })}
+          >
             <Filter
               filters={filters}
               setFilter={setFilter}

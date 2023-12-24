@@ -10,8 +10,8 @@
 .mask {
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
   top: 0;
   left: 0;
   position: fixed;
@@ -22,8 +22,8 @@
   width: 100%;
 }
 
-.isSearchMobileOpen {
-  display: none;
+.isSearchMobileOpen, .isOpenDetail {
+  display: none !important;
 }
 
 .notFound {
