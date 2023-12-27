@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 const Map = ({ latitude, longitude }) => {
   const { isLoaded } = useJsApiLoader({
     id: "d24e27d5c81cb08f",
-    googleMapsApiKey: process.env.MAP_API_KEY,
+    googleMapsApiKey: "AIzaSyA-6IIa-tWOrabHLzlXwdmXCsz-UIC-qKs",
   });
 
   const mapContainerStyle = {

@@ -14,7 +14,12 @@ import cx from "classnames";
  * @param {number} filterQuantity - The quantity of active filters.
  * @returns {JSX.Element} The rendered Header component.
  */
-const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
+const Header = ({
+  setSearch,
+  isSearchMobileOpen,
+  filterQuantity,
+  headerRef,
+}) => {
   const refInput = useRef(null);
 
   return (
@@ -24,6 +29,7 @@ const Header = ({ setSearch, isSearchMobileOpen, filterQuantity }) => {
         className={cx(styles.header, {
           [styles.isSearchMobileOpen]: isSearchMobileOpen,
         })}
+        ref={headerRef}
       >
         <div className={cx("container", styles.mof)}>
           <Image

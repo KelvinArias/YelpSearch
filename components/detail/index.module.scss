@@ -2,7 +2,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 3;
+  z-index: 4;
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -259,7 +259,7 @@
 @keyframes show {
   0% {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(200px);
   }
 
   100% {
@@ -282,6 +282,11 @@
     .article {
       .header {
         height: 300px;
+        .information {
+          h3{
+            max-width: none;
+          }
+        }
       }
       .gallery {
         .item {

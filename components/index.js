@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useRef } from "react";
 import styles from "./index.module.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -59,6 +59,8 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_VALUE);
   const filtersQuantity = getFiltersQuantity(filters);
   const [openDetail, setOpen] = useState(false);
+  const headerRef = useRef(null);
+  const [lastCardSelected, setLastCardSelected] = useState(null);
   const [geolocation, setCurrentLocation] = useState({
     status: false,
     latitude: 0,
@@ -79,7 +81,8 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
   } = data;
   const notFound = businesses.length === 0;
 
-  const handleViewBusiness = (alias) => {
+  const handleViewBusiness = (card, alias) => {
+    setLastCardSelected(card);
     initLoading({ isLoadingReviews: true, isLoadingDetail: true });
     getDetail(alias);
     getReviews(alias);
@@ -145,7 +148,14 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     setLocation(newValue);
   };
 
-  const handleClose = () => setOpen(false);
+  const handleCloseDetail = () => {
+    setOpen(false);
+    console.log({ lastCardSelected });
+    lastCardSelected.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  };
 
   return (
     <main>
@@ -153,6 +163,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
         setSearch={handleLocation}
         isSearchMobileOpen={isSearchMobileOpen}
         filterQuantity={filtersQuantity}
+        headerRef={headerRef}
       />
 
       <Fragment>
@@ -176,6 +187,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
               setIsSearchMobileOpen={setIsSearchMobileOpen}
               isLoading={isLoading}
               businessQuantity={businesses.length}
+              headerRef={headerRef}
             />
             {isLoading || geolocation.geoIsLoading ? (
               <Loading width={100} height={100} />
@@ -213,12 +225,12 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
       </Fragment>
       {openDetail && (
         <Fragment>
-          <div className={styles.mask} onClick={handleClose} />
+          <div className={styles.mask} />
           {isLoadingDetail ? (
             <Loading width={100} height={100} />
           ) : (
             <Detail
-              onClose={handleClose}
+              onClose={handleCloseDetail}
               business={businessDetail}
               isLoading={isLoadingDetail}
               geolocation={geolocation}

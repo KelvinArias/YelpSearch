@@ -37,6 +37,7 @@ const Filter = ({
   setIsSearchMobileOpen,
   isLoading,
   businessQuantity,
+  headerRef,
 }) => {
   const [classToAdd, setClassToAdd] = useState("");
   const [showMore, setShowMore] = useState(false);
@@ -49,8 +50,16 @@ const Filter = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = ref.current.getBoundingClientRect().top <= 100;
-      setIsFixed(isScrolled);
+      console.log({
+        top: ref.current.getBoundingClientRect().top,
+        header: headerRef.current.getBoundingClientRect().height,
+      });
+      const ElementDistanceFromTop = ref.current.getBoundingClientRect().top;
+      const headerHeight = headerRef.current.getBoundingClientRect().height;
+      const elementNeedsToBeFixed =
+        ElementDistanceFromTop - headerHeight < 0 &&
+        ElementDistanceFromTop !== 0;
+      setIsFixed(elementNeedsToBeFixed);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -58,7 +67,7 @@ const Filter = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [setIsFixed]);
+  }, [setIsFixed, headerRef]);
 
   const removeFilter = (key) => {
     const { [key]: _, ...others } = filters;

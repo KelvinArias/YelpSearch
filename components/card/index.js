@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import styles from "./index.module.scss";
 import SignSVG from "@public/sign";
 import LocationSVG from "@public/location";
@@ -51,10 +52,11 @@ const Card = ({ business, geolocation, onClick }) => {
     price,
     coordinates,
   } = business;
+
   const mapDirection = getMapDirection(coordinates, geolocation);
 
   return (
-    <article className={styles.card} onClick={() => onClick(alias)}>
+    <article className={styles.card} onClick={(e) => onClick(e, alias)}>
       <header
         className={cx(styles.header, { [styles.noFoundImage]: !image_url })}
       >
