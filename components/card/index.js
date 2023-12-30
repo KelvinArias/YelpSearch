@@ -52,7 +52,6 @@ const Card = ({ business, geolocation, onClick }) => {
     price,
     coordinates,
   } = business;
-
   const mapDirection = getMapDirection(coordinates, geolocation);
 
   return (

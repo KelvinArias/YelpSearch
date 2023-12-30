@@ -161,10 +161,13 @@ const Main = ({
 
   const handleCloseDetail = () => {
     setOpen(false);
-    lastCardSelected.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-    });
+    setTimeout(() => {
+      lastCardSelected.target.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }, 100);
   };
 
   return (
