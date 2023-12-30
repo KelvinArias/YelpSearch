@@ -148,3 +148,18 @@ export const getDetail = (alias) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getGoogleApi = () => async (dispatch) => {
+  const query = `{ getGoogleAPI }`;
+  try {
+    const graphQLClient = new GraphQLClient(endpoint, { method: "POST" });
+    const data = await graphQLClient.request(query);
+
+    dispatch({
+      type: TYPE.SET_GOOGLE_API,
+      payload: data.getGoogleAPI,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -4,11 +4,14 @@ const { createSchema, createYoga } = require("graphql-yoga");
 const yelp = require("yelp-fusion");
 const client = yelp.client(process.env.API_KEY);
 
+//getGoogleAPI: (_, { alias }) => {},
+
 const typeDefs = `
     type Query {
       search(location: String, latitude: Float, longitude: Float, price: String, attributes: String, categories: String, radius: Int, sort_by: String, limit: Int, offset: Int): SearchResult
       getDetail(alias: String): Detail
       getReviews(alias: String): [Review]
+      getGoogleAPI: String
     }
 
     type SearchResult {
@@ -108,6 +111,7 @@ const resolvers = {
       const resp = await client.reviews(alias);
       return resp.jsonBody.reviews;
     },
+    getGoogleAPI: () => process.env.GOOGLE_API,
   },
 };
 

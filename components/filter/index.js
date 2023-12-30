@@ -50,10 +50,6 @@ const Filter = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log({
-        top: ref.current.getBoundingClientRect().top,
-        header: headerRef.current.getBoundingClientRect().height,
-      });
       const ElementDistanceFromTop = ref.current.getBoundingClientRect().top;
       const headerHeight = headerRef.current.getBoundingClientRect().height;
       const elementNeedsToBeFixed =

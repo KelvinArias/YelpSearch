@@ -16,13 +16,12 @@ import Loading from "./dumb/loading";
 import Filter from "./filter";
 import cx from "classnames";
 import { getCurrentLocation } from "@libs/index";
-/*
-import Detail from "./Detail";*/
 import {
   getBusiness,
   getReviews,
   initLoading,
   getDetail,
+  getGoogleApi,
 } from "@store/actions/homeActions.js";
 import { getFiltersQuantity } from "@libs/index";
 import Pagination from "./pagination/";
@@ -35,8 +34,10 @@ import Detail from "./detail/";
  * @param {Boolean} initLoading - Initialize the loading when the user make a search
  * @param {Function} getDetail - Obtains the details of the business selected
  * @param {Function} getReviews - Obtains the reviews from the business selected
+ * @param {Function} getGoogleApi - Get the google API KEY from the server to make the map works
  * @param {Object} data - Global information about the business and charging status
  * @param {Boolean} data.isLoading - Indicate if it's loading a search
+ * @param {String} data.googleAPI - Google API key to make the map work
  * @param {Object} data.business - Object with all the information about the business
  * @param {Boolean} data.business.image_url - image url of the business
  * @param {String} data.business.name - Name of the business
@@ -51,7 +52,14 @@ import Detail from "./detail/";
  * @param {Array} data.business.price - Indicates how expensive the business is.
  * @returns {JSX.Element} The rendered component.
  */
-const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
+const Main = ({
+  getBusiness,
+  initLoading,
+  getDetail,
+  getReviews,
+  getGoogleApi,
+  data,
+}) => {
   const [location, setLocation] = useState(DEFAULT_LOCATION_VALUE);
   const [sortValue, setSort] = useState(DEFAULT_SORT_VALUE);
   const [isSearchMobileOpen, setIsSearchMobileOpen] = useState(false);
@@ -78,6 +86,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     isLoadingDetail,
     totalResults,
     isLoadingReviews,
+    googleAPI,
   } = data;
   const notFound = businesses.length === 0;
 
@@ -106,7 +115,9 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
     }
   };
 
+  // Initialize the google maps service
   useEffect(() => {
+    getGoogleApi();
     getCurrentLocation()
       .then(({ latitude, longitude }) => {
         setCurrentLocation({
@@ -124,7 +135,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
         }));
         console.error("Error getting location:", error);
       });
-  }, []);
+  }, [getGoogleApi]);
 
   useEffect(handleSearch, [
     location,
@@ -150,7 +161,6 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
 
   const handleCloseDetail = () => {
     setOpen(false);
-    console.log({ lastCardSelected });
     lastCardSelected.scrollIntoView({
       behavior: "smooth",
       block: "end",
@@ -236,6 +246,7 @@ const Main = ({ getBusiness, initLoading, getDetail, getReviews, data }) => {
               geolocation={geolocation}
               reviews={businessReviews}
               isLoadingReviews={isLoadingReviews}
+              googleAPI={googleAPI}
             />
           )}
         </Fragment>
@@ -250,6 +261,7 @@ Main.propTypes = {
   getReviews: PropTypes.func.isRequired,
   initLoading: PropTypes.func.isRequired,
   getDetail: PropTypes.func.isRequired,
+  getGoogleApi: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -261,4 +273,5 @@ export default connect(mapStateToProps, {
   initLoading,
   getDetail,
   getReviews,
+  getGoogleApi,
 })(Main);

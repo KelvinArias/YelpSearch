@@ -8,12 +8,13 @@ import PropTypes from "prop-types";
  * @component
  * @param {number} latitude - The latitude of the location to be marked on the map.
  * @param {number} longitude - The longitude of the location to be marked on the map.
+ * @param {String} googleAPI - Google API key
  * @returns {JSX.Element|null} Returns the Map component JSX or null if the Google Maps API is not loaded.
  */
-const Map = ({ latitude, longitude }) => {
+const Map = ({ latitude, longitude, googleAPI }) => {
   const { isLoaded } = useJsApiLoader({
     id: "d24e27d5c81cb08f",
-    googleMapsApiKey: "AIzaSyA-6IIa-tWOrabHLzlXwdmXCsz-UIC-qKs",
+    googleMapsApiKey: googleAPI,
   });
 
   const mapContainerStyle = {

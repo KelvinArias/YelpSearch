@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./index.module.scss";
 import cx from "classnames";
 import Image from "next/image";
@@ -14,10 +14,18 @@ import Loading from "@components/dumb/loading";
 import Stars from "@components/dumb/Stars";
 
 /**
- * Tag component for rendering a clickable tag.
+ * Detail component displays detailed information about a business.
  *
  * @component
- * @returns {JSX.Element} The rendered Tag component.
+ * @param {Object} props - The component props
+ * @param {Object} props.business - Business information object.
+ * @param {Function} props.onClose - Callback function to close the detail view.
+ * @param {boolean} props.isLoading - Loading state for the business information.
+ * @param {Object} props.geolocation - Geolocation information.
+ * @param {Array} props.reviews - Array of reviews for the business.
+ * @param {boolean} props.isLoadingReviews - Loading state for reviews.
+ * @param {string} props.googleAPI - Google API key for Map component.
+ * @returns {JSX.Element} - Rendered component.
  */
 const Detail = ({
   business,
@@ -26,6 +34,7 @@ const Detail = ({
   geolocation,
   reviews,
   isLoadingReviews,
+  googleAPI,
 }) => {
   const [showPhone, setShowPhone] = useState(false);
   const {
@@ -138,6 +147,7 @@ const Detail = ({
                 <Map
                   latitude={coordinates.latitude}
                   longitude={coordinates.longitude}
+                  googleAPI={googleAPI}
                 />
                 <div className={styles.infoAddress}>
                   <div className={styles.address}>
@@ -209,6 +219,33 @@ const Detail = ({
       </article>
     </section>
   );
+};
+
+Detail.propTypes = {
+  business: PropTypes.shape({
+    image_url: PropTypes.string,
+    name: PropTypes.string,
+    review_count: PropTypes.number,
+    display_phone: PropTypes.string,
+    rating: PropTypes.number,
+    is_closed: PropTypes.bool,
+    price: PropTypes.string,
+    photos: PropTypes.arrayOf(PropTypes.string),
+    coordinates: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+    }),
+    location: PropTypes.shape({
+      display_address: PropTypes.arrayOf(PropTypes.string),
+    }),
+    hours: PropTypes.array,
+  }),
+  onClose: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  geolocation: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
+  isLoadingReviews: PropTypes.bool.isRequired,
+  googleAPI: PropTypes.string.isRequired,
 };
 
 export default Detail;

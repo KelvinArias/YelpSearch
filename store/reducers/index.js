@@ -10,6 +10,7 @@ const initialState = {
   isLoadingDetail: false,
   isLoadingReviews: false,
   totalResults: 0,
+  googleAPI: "",
 };
 
 export default function historyReducer(state = initialState, action) {
@@ -38,6 +39,11 @@ export default function historyReducer(state = initialState, action) {
         viewedBusinesses: [...state.viewedBusinesses, action.payload.id],
         businessDetail: action.payload,
         isLoadingDetail: false,
+      };
+    case TYPES.SET_GOOGLE_API:
+      return {
+        ...state,
+        googleAPI: action.payload,
       };
     default:
       return state;
