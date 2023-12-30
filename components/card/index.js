@@ -73,7 +73,7 @@ const Card = ({ business, geolocation, onClick }) => {
           <Tags categories={categories} />
           <Score rating={rating} review_count={review_count} />
         </div>
-        <div className={styles.direction}>
+        <div className={styles.direction} onClick={(e) => e.stopPropagation()}>
           <SignSVG is_closed={is_closed} size={50} />
           <Button
             disabled={!origin}
