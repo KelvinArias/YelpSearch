@@ -28,7 +28,6 @@ export const starsInfo = [
 // Pagination
 export const DEFAULT_PAGE_VALUE = 1;
 export const BUSINESS_PER_PAGE = 10;
-export const DOTS = "&#8230;";
 
 // Filter
 export const KEY_RADIUS = "radius";

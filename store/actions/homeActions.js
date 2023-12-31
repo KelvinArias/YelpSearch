@@ -1,21 +1,10 @@
 import * as TYPE from "../types";
 const endpoint = "http://localhost:4000/graphql";
 import { GraphQLClient } from "graphql-request";
+import { formatFiltersToString } from "@libs/index";
 
 export const getBusiness = (filters) => async (dispatch) => {
-  let formatFilters = ``;
-  Object.keys(filters).forEach((key) => {
-    // Transform the arrays into strings separated by spaces
-    if (Array.isArray(filters[key])) {
-      formatFilters += `, ${key}: "${filters[key].join(",")}"`;
-    }
-    if (typeof filters[key] === "number") {
-      formatFilters += `, ${key}: ${filters[key]}`;
-    }
-    if (typeof filters[key] === "string") {
-      formatFilters += `, ${key}: "${filters[key]}"`;
-    }
-  });
+  const formatFilters = formatFiltersToString(filters);
 
   try {
     const query = `

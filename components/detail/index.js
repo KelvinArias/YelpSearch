@@ -12,6 +12,7 @@ import Button from "../dumb/button";
 import { getMapDirection } from "@libs/index";
 import Loading from "@components/dumb/loading";
 import Stars from "@components/dumb/Stars";
+import { getDayName, formatTime } from "@libs/index";
 
 /**
  * Detail component displays detailed information about a business.
@@ -20,7 +21,6 @@ import Stars from "@components/dumb/Stars";
  * @param {Object} props - The component props
  * @param {Object} props.business - Business information object.
  * @param {Function} props.onClose - Callback function to close the detail view.
- * @param {boolean} props.isLoading - Loading state for the business information.
  * @param {Object} props.geolocation - Geolocation information.
  * @param {Array} props.reviews - Array of reviews for the business.
  * @param {boolean} props.isLoadingReviews - Loading state for reviews.
@@ -30,7 +30,6 @@ import Stars from "@components/dumb/Stars";
 const Detail = ({
   business,
   onClose,
-  isLoading,
   geolocation,
   reviews,
   isLoadingReviews,
@@ -52,41 +51,6 @@ const Detail = ({
   } = business;
   const [imageSelected, setImageSelected] = useState(image_url);
   const today = new Date().getDay();
-
-  // Helper function to get the day name from the day number
-  const getDayName = (day) => {
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    return days[day];
-  };
-
-  // Helper function to format time in HH:MM AM/PM format
-  function formatTime(value) {
-    // Convert the value to a string
-    const stringValue = value.toString();
-
-    // Extract hours and minutes
-    const hours = stringValue.padStart(4, "0").substring(0, 2);
-    const minutes = stringValue.padStart(4, "0").substring(2);
-
-    // Convert hours to 12-hour format
-    const formattedHours = (parseInt(hours) % 12 || 12)
-      .toString()
-      .padStart(2, "0");
-
-    // Determine AM/PM
-    const period = parseInt(hours) < 12 ? "AM" : "PM";
-
-    // Return the formatted time string
-    return `${formattedHours}:${minutes} ${period}`;
-  }
 
   return (
     <section className={styles.detail}>

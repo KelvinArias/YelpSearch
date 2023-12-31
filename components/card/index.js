@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import styles from "./index.module.scss";
 import SignSVG from "@public/sign";
 import LocationSVG from "@public/location";
