@@ -157,6 +157,10 @@
         max-width: 345px;
         margin: auto;
         margin-top: 20px;
+        .notHours { 
+          text-transform: capitalize;
+          font-weight: bold;
+        }
         table {
           width: 100%;
           padding: 20px;

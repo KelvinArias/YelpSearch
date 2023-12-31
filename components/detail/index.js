@@ -125,8 +125,9 @@ const Detail = ({
                   />
                 </div>
               </div>
-              {hours && (
-                <div className={styles.hours}>
+
+              <div className={styles.hours}>
+                {hours ? (
                   <table>
                     <tbody>
                       {hours[0].open.map((hour, index) => (
@@ -146,8 +147,12 @@ const Detail = ({
                       ))}
                     </tbody>
                   </table>
-                </div>
-              )}
+                ) : (
+                  <div className={styles.notHours}>
+                    <p>No schedule Found</p>
+                  </div>
+                )}
+              </div>
             </div>
             <div className={styles.reviews}>
               <h3>Recommended Reviews</h3>
