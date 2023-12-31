@@ -5,6 +5,8 @@
   .contentContainer {
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    min-height: 100vh;
   }
 }
 .mask {

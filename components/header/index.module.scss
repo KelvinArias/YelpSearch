@@ -2,7 +2,11 @@
   background-color: red;
   display: flex;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
   .mof {
     margin: 0;
     padding: 20px;
@@ -81,7 +85,9 @@
   }
 }
 
-
+.placeHolder {
+  height: 100px;
+}
 
 @keyframes move {
   to {
@@ -109,11 +115,7 @@
 
 @media (min-width: 992px) {
   .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 3;
+    
     .mof {
       justify-content: center;
       .logo,
@@ -136,8 +138,6 @@
       }
     }
   }
-  .placeHolder {
-    height: 100px;
-  }
+  
 }
 

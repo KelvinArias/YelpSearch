@@ -36,6 +36,7 @@ export const KEY_SUGGESTED = "attributes";
 export const KEY_PRICE = "price";
 export const DEFAULT_LOCATION_VALUE = "Seattle";
 export const DEFAULT_SORT_VALUE = "best_match";
+export const INITIAL_POSITION_VALUE = 25;
 
 export const sortBy = {
   best_match: "Best Match",

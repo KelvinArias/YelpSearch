@@ -9,6 +9,7 @@ import {
   KEY_CATEGORIES,
   KEY_RADIUS,
   KEY_SUGGESTED,
+  INITIAL_POSITION_VALUE,
   prices,
   suggestedValues,
   categories,
@@ -41,7 +42,7 @@ const Filter = ({
 }) => {
   const [classToAdd, setClassToAdd] = useState("");
   const [showMore, setShowMore] = useState(false);
-  const [isFixed, setIsFixed] = useState(false);
+  const [positionTop, setPositionTop] = useState(INITIAL_POSITION_VALUE);
   const ref = useRef(null);
   const filterPrices = filters[KEY_PRICE] ?? [];
   const filterSuggestions = filters[KEY_SUGGESTED] ?? [];
@@ -52,10 +53,14 @@ const Filter = ({
     const handleScroll = () => {
       const ElementDistanceFromTop = ref.current.getBoundingClientRect().top;
       const headerHeight = headerRef.current.getBoundingClientRect().height;
-      const elementNeedsToBeFixed =
+      const elementNeedsToMove =
         ElementDistanceFromTop - headerHeight < 0 &&
         ElementDistanceFromTop !== 0;
-      setIsFixed(elementNeedsToBeFixed);
+      if (elementNeedsToMove) {
+        setPositionTop(window.scrollY - headerHeight);
+      } else {
+        setPositionTop(INITIAL_POSITION_VALUE);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -63,7 +68,7 @@ const Filter = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [setIsFixed, headerRef]);
+  }, [setPositionTop, headerRef]);
 
   const removeFilter = (key) => {
     const { [key]: _, ...others } = filters;
@@ -97,19 +102,13 @@ const Filter = ({
 
   return (
     <Fragment>
-      <div
-        ref={ref}
-        className={cx(styles.positionPlaceHolder, {
-          [styles.placeHolder]: isFixed,
-        })}
-      />
+      <div ref={ref} className={styles.placeHolder} />
       <aside
         className={cx(styles.filter, {
           [styles.isSearchMobileOpen]: isSearchMobileOpen,
-          [styles.isFixed]: isFixed,
         })}
         style={{
-          left: isFixed ? ref.current.getBoundingClientRect().left + "px" : 0,
+          top: positionTop,
         }}
       >
         <div className={styles.showResultsMobile}>
