@@ -36,7 +36,7 @@ import cx from "classnames";
  * @param {function} onClick - show the details of the business
  * @returns {JSX.Element} The rendered Card component.
  */
-const Card = ({ business, geolocation, onClick }) => {
+const Card = ({ business, geolocation, onClick, viewed }) => {
   const {
     alias,
     image_url,
@@ -67,7 +67,7 @@ const Card = ({ business, geolocation, onClick }) => {
         />
       </header>
       <div className={styles.information}>
-        <div className={styles.description}>
+        <div className={cx(styles.description, { [styles.viewed]: viewed })}>
           <h3>{name}</h3>
           <Tags categories={categories} />
           <Score rating={rating} review_count={review_count} />
