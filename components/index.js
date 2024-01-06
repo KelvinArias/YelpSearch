@@ -239,19 +239,15 @@ const Main = ({
       {openDetail && (
         <Fragment>
           <div className={styles.mask} />
-          {isLoadingDetail ? (
-            <Loading width={100} height={100} />
-          ) : (
-            <Detail
-              onClose={handleCloseDetail}
-              business={businessDetail}
-              isLoading={isLoadingDetail}
-              geolocation={geolocation}
-              reviews={businessReviews}
-              isLoadingReviews={isLoadingReviews}
-              googleAPI={googleAPI}
-            />
-          )}
+          <Detail
+            onClose={handleCloseDetail}
+            business={businessDetail}
+            isLoading={isLoadingDetail}
+            geolocation={geolocation}
+            reviews={businessReviews}
+            isLoadingReviews={isLoadingReviews}
+            googleAPI={googleAPI}
+          />
         </Fragment>
       )}
     </main>
