@@ -16,6 +16,10 @@ export default function RootLayout({ children }) {
           href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
           rel="stylesheet"
         ></link>
+        <link
+          rel="shortcut icon"
+          href="https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_large_assets/dcfe403147fc/assets/img/logos/favicon.ico"
+        ></link>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
