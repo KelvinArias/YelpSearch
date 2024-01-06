@@ -12,7 +12,7 @@ import {
   BUSINESS_PER_PAGE,
 } from "@const/index";
 import Card from "./card";
-import Loading from "./dumb/loading";
+import Loading from "@components/dumb/loading";
 import Filter from "./filter";
 import cx from "classnames";
 import { getCurrentLocation } from "@libs/index";

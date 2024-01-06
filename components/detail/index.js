@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./index.module.scss";
 import cx from "classnames";
 import Image from "next/image";
 import SignSVG from "@public/sign";
-import Score from "../dumb/score";
+import Score from "@components/dumb/score";
 import noFoundImage from "@public/noFoundImage.png";
 import defaultUserAvatar from "@public/defaultUserAvatar.png";
-import Map from "../dumb/map";
-import Button from "../dumb/button";
+import Map from "@components/dumb/map";
+import Button from "@components/dumb/button";
 import { getMapDirection } from "@libs/index";
 import Loading from "@components/dumb/loading";
 import Stars from "@components/dumb/Stars";
