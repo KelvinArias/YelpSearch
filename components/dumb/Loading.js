@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import loadingSvg from "@public/loading.gif";
 import PropTypes from "prop-types";

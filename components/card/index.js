@@ -1,11 +1,12 @@
+"use client";
 import styles from "./index.module.scss";
 import SignSVG from "@public/sign";
 import LocationSVG from "@public/location";
 import PhoneSVG from "@public/phone";
 import Image from "next/image";
-import Tags from "@components/dumb/tag.js";
-import Score from "@components/dumb/score.js";
-import Button from "@components/dumb/button.js";
+import Tags from "@components/dumb/tag";
+import Score from "@components/dumb/score";
+import Button from "@components/dumb/button";
 import CheckSvg from "@public/check";
 import PropTypes from "prop-types";
 import noFoundImage from "@public/noFoundImage.png";

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import PropTypes from "prop-types";

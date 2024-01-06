@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { rating as ratingClass, half } from "./index.module.scss";
 import { starsInfo } from "@const/index";

@@ -1,3 +1,4 @@
+"use client";
 import { useRef, useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.module.scss";

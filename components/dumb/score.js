@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { score, count } from "./index.module.scss";
-import Stars from "./Stars";
+import Stars from "@components/dumb/Stars";
 
 /**
  * Score component for displaying a rating and review count.

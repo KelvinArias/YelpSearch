@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { categoryContainer, tag } from "./index.module.scss";
 

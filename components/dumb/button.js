@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { button, disabledButton } from "./index.module.scss";
 import cx from "classnames";
