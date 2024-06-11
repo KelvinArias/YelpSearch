@@ -107,11 +107,17 @@ export const getDayName = (day) => {
  * @param {number} value - The time value in HHMM format.
  * @returns {string} - The formatted time string.
  */
+/**
+ * Helper function to format time in HH:MM AM/PM format.
+ *
+ * @param {number} value - The time value in HHMM format.
+ * @returns {string} - The formatted time string.
+ */
 export function formatTime(value) {
   // Number must be a positive number between 0 and 2360 otherwise it will return undefined.
+  const intValue = parseInt(value);
   const hourLimit = 2360;
-  if (value < 0 || value > hourLimit || !Number.isInteger(value))
-    return undefined;
+  if (intValue < 0 || intValue > hourLimit) return undefined;
 
   // Convert the value to a string
   const stringValue = value.toString();
@@ -127,9 +133,8 @@ export function formatTime(value) {
 
   // Determine AM/PM
   const period = parseInt(hours) < 12 ? "AM" : "PM";
-
   // Return the formatted time string
-  return `${formattedHours}:${minutes} ${period}`;
+  return `${formattedHours}:${minutes}${period}`;
 }
 
 /**
@@ -138,21 +143,15 @@ export function formatTime(value) {
  * @param {Object} filters - The filters object to be formatted.
  * @returns {string} - The formatted string representation of the filters.
  */
-export function formatFiltersToString(filters) {
-  let formatFilters = "";
-
+export function formatFiltersToString(url, filters) {
   Object.keys(filters).forEach((key) => {
     // Transform the arrays into strings separated by spaces
     if (Array.isArray(filters[key])) {
-      formatFilters += `, ${key}: "${filters[key].join(",")}"`;
-    }
-    if (typeof filters[key] === "number") {
-      formatFilters += `, ${key}: ${filters[key]}`;
-    }
-    if (typeof filters[key] === "string") {
-      formatFilters += `, ${key}: "${filters[key]}"`;
+      url.searchParams.append(key, filters[key].join(","));
+    } else {
+      url.searchParams.append(key, filters[key]);
     }
   });
 
-  return formatFilters;
+  return url;
 }

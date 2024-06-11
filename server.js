@@ -3,7 +3,7 @@ const { createServer } = require("node:http");
 const { createSchema, createYoga } = require("graphql-yoga");
 const yelp = require("yelp-fusion");
 const client = yelp.client(process.env.API_KEY);
-
+// obsolete server in graphql
 const typeDefs = `
     type Query {
       search(location: String, latitude: Float, longitude: Float, price: String, attributes: String, categories: String, radius: Int, sort_by: String, limit: Int, offset: Int): SearchResult
