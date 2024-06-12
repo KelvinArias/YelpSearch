@@ -152,7 +152,8 @@ const Main = ({
   };
 
   const handleLocation = (newValue) => {
-    if (!newValue) {
+    console.log("newValue", newValue);
+    if (!newValue || newValue === location) {
       return setIsSearchMobileOpen(true);
     }
     setIsSearchMobileOpen(false);

@@ -13,6 +13,7 @@
   transition: .3s all;
   &.isSearchMobileOpen {
     transform: translateX(0);
+    right: 0;
   }
   .title {
     font-weight: bold;

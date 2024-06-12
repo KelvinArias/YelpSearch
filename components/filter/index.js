@@ -109,7 +109,7 @@ const Filter = ({
           [styles.isSearchMobileOpen]: isSearchMobileOpen,
         })}
         style={{
-          top: positionTop,
+          ...(!isSearchMobileOpen ? { top: positionTop } : {}),
         }}
       >
         <div className={styles.showResultsMobile}>
